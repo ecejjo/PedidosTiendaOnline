@@ -1,4 +1,4 @@
-package com.ericsson.anuncio;
+package com.ericsson.pedido;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
