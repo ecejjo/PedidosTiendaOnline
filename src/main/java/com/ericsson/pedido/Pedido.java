@@ -1,9 +1,13 @@
 package com.ericsson.pedido;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -13,6 +17,9 @@ public class Pedido {
 	private long id;
 	
 	String titulo;
+	
+	@OneToMany
+	private List<Elemento> elementos = new ArrayList<>();
 	
 	public Pedido() {}
 
@@ -28,6 +35,6 @@ public class Pedido {
 	
 	@Override
 	public String toString() {
-		return this.titulo;
+		return "Pedido [id=" + this.id + ", titulo=" + this.titulo + ", elementos=" + this.elementos + "]";
 	}
 }
