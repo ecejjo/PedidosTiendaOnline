@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class PedidoController {
 
@@ -28,16 +27,15 @@ public class PedidoController {
 		return "TablonPedidos_template";
 	}
 
-
-	@GetMapping("/Nuevo")
+	@GetMapping("/Nuevo{titulo}")
 	public String NuevoPedido(Model model, 
-		@RequestParam String titulo) {
-	
-		repository.save(new Pedido(titulo));
-		
+			@RequestParam String titulo) {
+
+		repository.save(new Pedido(titulo));	
+
 		model.addAttribute("titulo", titulo);
 
-		return "NuevoPedido_template";
+		return "VerPedido_template";
 	}
 	
 	@GetMapping("/pedido/{id}")
