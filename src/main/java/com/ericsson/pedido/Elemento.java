@@ -14,6 +14,8 @@ public class Elemento {
 	
 	String texto;
 	
+	public Elemento() {}
+	
 	public Elemento(
 			String texto)
 	{

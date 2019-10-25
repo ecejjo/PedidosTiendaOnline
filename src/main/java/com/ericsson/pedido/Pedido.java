@@ -27,6 +27,7 @@ public class Pedido {
 			String titulo)
 	{
 		this.titulo = titulo;
+		this.elementos = new ArrayList<>();
 	}
 	
 	public String getTitulo() {

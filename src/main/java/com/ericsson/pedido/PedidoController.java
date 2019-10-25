@@ -20,20 +20,28 @@ public class PedidoController {
 
 	@PostConstruct
 	public void init() {
-		
+
+		Pedido pedido = new Pedido("Titulo de Pedido1: con un elemento");
 		Elemento elemento = new Elemento("Pedido1.Elemento1");
 		elementosRepository.save(elemento);
-
-		Pedido pedido = new Pedido("Titulo de Pedido1");
 		pedido.getElementos().add(elemento);
 		pedidosRepository.save(pedido);
+
+		pedido = new Pedido("Titulo de Pedido2: con 2 elementos");
+		
+		elemento = new Elemento("Pedido2.Elemento1");
+		elementosRepository.save(elemento);
+		pedido.getElementos().add(elemento);
 
 		elemento = new Elemento("Pedido2.Elemento2");
 		elementosRepository.save(elemento);
-
-		pedido = new Pedido("Titulo de Pedido2");
 		pedido.getElementos().add(elemento);
+
 		pedidosRepository.save(pedido);
+		
+		pedido = new Pedido("Titulo de Pedido3: sin elementos");
+		pedidosRepository.save(pedido);
+
 	}
 
 	@GetMapping("/")	
@@ -46,9 +54,10 @@ public class PedidoController {
 	public String NuevoPedido(Model model, 
 			@RequestParam String titulo) {
 
-		pedidosRepository.save(new Pedido(titulo));	
+		Pedido pedido = new Pedido(titulo);
+		pedidosRepository.save(pedido);
 
-		model.addAttribute("titulo", titulo);
+		model.addAttribute("pedido", pedido);
 
 		return "VerPedido_template";
 	}
@@ -59,9 +68,12 @@ public class PedidoController {
 		Optional<Pedido> Pedido = pedidosRepository.findById(id);
 		
 		if(Pedido.isPresent()) {
-			model.addAttribute("titulo", Pedido.get().titulo);
+			model.addAttribute("pedido", Pedido.get());			
 		}
-
+		else {
+			model.addAttribute("titulo", "Pedido no encontrado.");			
+		}
+			
 		return "VerPedido_template";
 	}
 }
