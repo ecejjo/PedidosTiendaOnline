@@ -24,5 +24,10 @@ public class Pedido {
 	
 	public String getTitulo() {
 		return this.titulo;
-		}
+	}
+	
+	@Override
+	public String toString() {
+		return this.titulo;
+	}
 }
