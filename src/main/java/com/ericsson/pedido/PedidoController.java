@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -20,8 +18,8 @@ public class PedidoController {
 
 	@PostConstruct
 	public void init() {
-		repository.save(new Pedido("TituloPedido1"));
-		repository.save(new Pedido("TituloPedido2"));
+		repository.save(new Pedido("Titulo de Pedido1"));
+		repository.save(new Pedido("Titulo de Pedido2"));
 	}
 
 	@GetMapping("/")	
@@ -46,7 +44,11 @@ public class PedidoController {
 	public String verPedido(Model model,
 			@PathVariable long id) {
 		Optional<Pedido> Pedido = repository.findById(id);
-		model.addAttribute("titulo", Pedido);
+		
+		if(Pedido.isPresent()) {
+			model.addAttribute("titulo", Pedido.get().titulo);
+		}
+
 		return "VerPedido_template";
 	}
 }
