@@ -13,6 +13,12 @@ public class Elemento {
 	private long id;
 	
 	String texto;
+	
+	public Elemento(
+			String texto)
+	{
+		this.texto = texto;
+	}
 
 	@Override
 	public String toString() {

@@ -33,6 +33,10 @@ public class Pedido {
 		return this.titulo;
 	}
 	
+	public List<Elemento> getElementos() {
+		return this.elementos;
+	}
+	
 	@Override
 	public String toString() {
 		return "Pedido [id=" + this.id + ", titulo=" + this.titulo + ", elementos=" + this.elementos + "]";
