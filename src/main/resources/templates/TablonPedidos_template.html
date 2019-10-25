@@ -1,11 +1,19 @@
 <html>
 
 <body>
- <p>Lista de Pedidos
- <p>{{#pedidos}}</p>
- <p><a href="pedido/{{-index}}">{{titulo}}</a>
+ <h1>Lista de Pedidos</h1>
+
+{{#pedidos}}
+	<ul>
+		<li><a href="pedido/{{-index}}">{{titulo}}</a></li>
+	</ul>
+{{/pedidos}}
+
+{{^pedidos}}
+    <p>Todavia no hay pedidos que mostrar.</p>
 {{/pedidos}}
 
 <p><a href="nuevoPedido.html">Registrar Nuevo Pedido</a>
- </body>
+
+</body>
 </html>
