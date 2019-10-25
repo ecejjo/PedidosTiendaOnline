@@ -1,15 +1,70 @@
 <html>
 
-<header>
-</header>
+<head>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    
+    <script type="text/javascript">
+    
+	 var myList = new Array();
+
+	function addElementToList() {
+		myList.push(document.getElementById("element-text-input").value);
+		document.getElementById("element-text-input").value = "";
+		document.getElementById("ListaElementos").innerHTML = showElementsInList();
+	}
+	
+	function deleteElementFromList(index) {
+		myList.splice(index);
+	}
+
+	function showElementsInList() {	 
+	 if (myList.length == 0 ) {
+	 	aux = "Ningún elemento en la lista.";
+	 }
+	 else {
+	 	 aux = "<ul>";
+	     for (var i = 0; i < myList.length; i ++ ) {
+	        aux += "<li>" + myList[i] + "</li>";
+	     }
+	     aux += "</ul>";
+	 }	
+     return aux;
+    }
+    
+    function setFormValues() {
+    	document.getElementById("titulo").value = document.getElementById("titulo-input").value;
+	    document.getElementById("elementos").value = myList;
+    }
+
+     </script>
+    
+</head>
+
 
 <body>
 
-	<form action="Nuevo" method="get">
-  		Titulo para el nuevo pedido: <input type="text" name="titulo"><br>
-  		<input type="submit" value="Enviar">
-  	</form>
+<h1>Nuevo Pedido</h1>
+		Titulo: <input type="text" name="titulo-input"><br>
 
-	</body>
+		<h2>Elementos del pedido</h2>
+		<div id='ListaElementos'></div>
+
+		<script type="text/javascript">
+		document.getElementById("ListaElementos").innerHTML = showElementsInList();
+		</script>
+
+		<hr>
+		
+		<input id='element-text-input' type='text'>
+		<button id='add-button' onclick="addElementToList()">Add</button>
+
+	<form action="Nuevo" method="get">
+		<input type="hidden" id="titulo" name="titulo">
+		<input type="hidden" id="elementos" name="elementos">
+		<hr>
+		<input type="submit" value="Registrar Nuevo Pedido" onclick="setFormValues()">
+	</form>
+
+</body>
 
 </html>
