@@ -6,21 +6,29 @@
     <script type="text/javascript">
     
 					var elementsList = new Array();
+					
+					function refreshSubmitButton() {
+						if (document.getElementById("titulo-input").value == "") {
+							document.getElementById("submitFormButton").disabled = true;
+						}
+						else {
+							document.getElementById("submitFormButton").disabled = false;
+						}
+					}
 
 					function addElementToList() {
 						elementsList.push(document.getElementById("element-text-input").value);
 						document.getElementById("element-text-input").value = "";
-						document.getElementById("ListaElementos").innerHTML = showElementsInList();
+						showElementsInList();
 					}
 					function deleteElementFromList(index) {
 						console.log("Running deleteElementFromList()...");
 						console.log("deleteElementFromList(): before delete, elementsList is: " + elementsList);
 						elementsList.splice(index, 1);
 						console.log("deleteElementFromList(): after delete, elementsList is: " + elementsList);
-						document.getElementById("ListaElementos").innerHTML = showElementsInList();
+						showElementsInList();
 					}
 					
-
 					function addDeleteElementButton(index) {
 						return " <button id=\"delete.element." + index
 								+ "\" onclick=\"deleteElementFromList(" + index
@@ -45,15 +53,12 @@
 							aux += "</ul>";
 						}
 						console.log("showElementsInList(): aux is: " + aux);
-						return aux;
+						document.getElementById("ListaElementos").innerHTML = aux;
 					}
 
 					function submitNuevoPedido() {
-						console.log("Running submitNuevoPedido()...");
-						console
-								.log("setFormVaues(): titulo-input.value is: "
-										+ document
-												.getElementById("titulo-input").value);
+						console.log("setFormVaues(): titulo-input.value is: "
+										+ document.getElementById("titulo-input").value);
 						console.log("setFormVaues(): elementsList is: "
 								+ elementsList);
 						document.getElementById("titulo").value = document
@@ -62,24 +67,21 @@
 						document.forms["NuevoPedido"].submit();
 					}
 				</script>
-    
 </head>
 
 
 <body>
 
-<h1>Nuevo Pedido</h1>
-		Titulo: <input type="text" id="titulo-input"><br>
-
+		<h1>Nuevo Pedido</h1>
+		
+		<hr>
+		Titulo: <input type="text" id="titulo-input" onblur="refreshSubmitButton()" onchange="refreshSubmitButton()" onkeydown="refreshSubmitButton()">
+		
+		<hr>
 		<h2>Elementos del pedido</h2>
 		<div id='ListaElementos'></div>
 
-		<script type="text/javascript">
-		document.getElementById("ListaElementos").innerHTML = showElementsInList();
-		</script>
-
-		<hr>
-		
+		<br>
 		<input id='element-text-input' type='text'>
 		<button id='add-button' onclick="addElementToList()">Añadir Elemento</button>
 
@@ -87,7 +89,8 @@
 		<input type="hidden" id="titulo" name="titulo">
 		<input type="hidden" id="elementos" name="elementos">
 	</form>
-		<hr><button onclick="submitNuevoPedido()">Registrar Nuevo Pedido</button>
+		<hr>
+		<button id="submitFormButton" onclick="submitNuevoPedido()" disabled>Registrar Nuevo Pedido</button>
 		
 </body>
 
