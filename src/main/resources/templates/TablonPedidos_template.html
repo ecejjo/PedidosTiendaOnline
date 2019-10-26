@@ -15,7 +15,7 @@
 
 {{#pedidos}}
 	<ul>
-		<li><a href="pedido/{{id}}">{{titulo}}</a></li>
+		<li><a href="/pedido/{{id}}">{{titulo}}</a></li>
 	</ul>
 {{/pedidos}}
 
@@ -23,7 +23,7 @@
     <p>Todavia no hay pedidos que mostrar.</p>
 {{/pedidos}}
 
-<form action="nuevoPedido.html" method="get">
+<form action="/nuevoPedido.html" method="get">
 	<button>Registrar Nuevo Pedido</button>
 </form>
 

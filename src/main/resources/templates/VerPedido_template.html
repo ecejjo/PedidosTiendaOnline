@@ -6,12 +6,7 @@
 
 function confirmarBorrarPedido() {
 	if (confirm("¿Borrar Pedido? [id=" + document.getElementById("pedido.id").value + "]")) {
-		// document.forms["BorrarForm"].submit();
-		// window.open("localhost:8080/Borrar/" + document.getElementById("pedido.id").value,"_self");
-		newUrl = "localhost:8080/Borrar/" + document.getElementById("pedido.id").value;
-		alert(newUrl);
-		// window.location.replace(newUrl);
-		window.open(newUrl, "_self");
+		document.getElementById("borrar-pedido-link").click();
 	}
 }
 </script>
@@ -38,6 +33,8 @@ function confirmarBorrarPedido() {
 <form id="BorrarForm" method="get" action="Borrar">
 	<input type="hidden" id=pedido.id name="id" value="{{pedido.id}}">
 </form>
+
+<a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
 
  <p><a href="/">Volver a tablon de Pedidos</a>
   
