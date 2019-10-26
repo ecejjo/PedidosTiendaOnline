@@ -31,9 +31,13 @@
      return aux;
     }
     
-    function setFormValues() {
+    function submitNuevoPedido() {
+    	console.log("Running submitNuevoPedido()...");
+    	console.log("setFormVaues(): titulo-input.value is: " + document.getElementById("titulo-input").value);
+  	  	console.log("setFormVaues(): myList is: " + myList);
     	document.getElementById("titulo").value = document.getElementById("titulo-input").value;
 	    document.getElementById("elementos").value = myList;
+	    document.forms["NuevoPedido"].submit();
     }
 
      </script>
@@ -44,7 +48,7 @@
 <body>
 
 <h1>Nuevo Pedido</h1>
-		Titulo: <input type="text" name="titulo-input"><br>
+		Titulo: <input type="text" id="titulo-input"><br>
 
 		<h2>Elementos del pedido</h2>
 		<div id='ListaElementos'></div>
@@ -58,13 +62,12 @@
 		<input id='element-text-input' type='text'>
 		<button id='add-button' onclick="addElementToList()">Add</button>
 
-	<form action="Nuevo" method="get">
+	<form id="NuevoPedido" action="Nuevo" method="get">
 		<input type="hidden" id="titulo" name="titulo">
 		<input type="hidden" id="elementos" name="elementos">
-		<hr>
-		<input type="submit" value="Registrar Nuevo Pedido" onclick="setFormValues()">
 	</form>
-
+		<hr><button onclick="submitNuevoPedido()">Registrar Nuevo Pedido</button>
+		
 </body>
 
 </html>
