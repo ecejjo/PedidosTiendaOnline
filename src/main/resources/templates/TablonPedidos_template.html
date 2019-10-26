@@ -1,7 +1,17 @@
 <html>
 
+<head>
+
+</head>
+
 <body>
  <h1>Lista de Pedidos</h1>
+ 
+{{#alertMessage}}
+ <script type="text/javascript">
+ 	alert("{{alertMessage}}");
+ </script>
+{{/alertMessage}}
 
 {{#pedidos}}
 	<ul>

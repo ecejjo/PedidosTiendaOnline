@@ -1,5 +1,23 @@
 <html>
 
+<head>
+
+<script type="text/javascript">
+
+function confirmarBorrarPedido() {
+	if (confirm("¿Borrar Pedido? [id=" + document.getElementById("pedido.id").value + "]")) {
+		// document.forms["BorrarForm"].submit();
+		// window.open("localhost:8080/Borrar/" + document.getElementById("pedido.id").value,"_self");
+		newUrl = "localhost:8080/Borrar/" + document.getElementById("pedido.id").value;
+		alert(newUrl);
+		// window.location.replace(newUrl);
+		window.open(newUrl, "_self");
+	}
+}
+</script>
+
+</head>
+
 <body>
 
 <h1>Mostrando Pedido</h1>
@@ -16,6 +34,10 @@
     <p>Todavia no hay <i>elementos</i> que mostrar.</p>
 {{/pedido.elementos}}
 
+<button onclick=confirmarBorrarPedido()>Borrar Pedido</button>
+<form id="BorrarForm" method="get" action="Borrar">
+	<input type="hidden" id=pedido.id name="id" value="{{pedido.id}}">
+</form>
 
  <p><a href="/">Volver a tablon de Pedidos</a>
   

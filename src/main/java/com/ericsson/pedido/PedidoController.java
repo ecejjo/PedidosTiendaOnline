@@ -84,4 +84,21 @@ public class PedidoController {
 			
 		return "VerPedido_template";
 	}
+	
+	@GetMapping("/Borrar/{id}")
+	public String borrarPedido(Model model,
+			@PathVariable long id) {
+		
+		Optional<Pedido> Pedido = pedidosRepository.findById(id);
+		
+		if(Pedido.isPresent()) {
+			pedidosRepository.deleteById(id);
+			model.addAttribute("alertMessage", "Pedido Borrado. [Id: " + id + "]");
+		}
+		else {
+			model.addAttribute("alertMessage", "Pedido no encontrado. [Id: " + id + "]");
+		}
+		return "TablonPedidos_template";
+	}
+
 }
