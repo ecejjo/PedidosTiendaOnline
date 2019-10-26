@@ -8,7 +8,7 @@
 					var elementsList = new Array();
 					
 					function refreshSubmitButton() {
-						if (document.getElementById("titulo-input").value == "") {
+						if (document.getElementById("titulo-text-input").value == "") {
 							document.getElementById("submitFormButton").disabled = true;
 						}
 						else {
@@ -16,7 +16,7 @@
 						}
 					}
 
-					function addElementToList() {
+					function addElement() {
 						elementsList.push(document.getElementById("element-text-input").value);
 						document.getElementById("element-text-input").value = "";
 						showElementsInList();
@@ -57,12 +57,12 @@
 					}
 
 					function submitNuevoPedido() {
-						console.log("setFormVaues(): titulo-input.value is: "
-										+ document.getElementById("titulo-input").value);
+						console.log("setFormVaues(): titulo-text-input.value is: "
+										+ document.getElementById("titulo-text-input").value);
 						console.log("setFormVaues(): elementsList is: "
 								+ elementsList);
 						document.getElementById("titulo").value = document
-								.getElementById("titulo-input").value;
+								.getElementById("titulo-text-input").value;
 						document.getElementById("elementos").value = elementsList;
 						document.forms["NuevoPedido"].submit();
 					}
@@ -70,28 +70,37 @@
 </head>
 
 
-<body>
+<body onload=showElementsInList()>
 
-		<h1>Nuevo Pedido</h1>
-		
-		<hr>
-		Titulo: <input type="text" id="titulo-input" onblur="refreshSubmitButton()" onchange="refreshSubmitButton()" onkeydown="refreshSubmitButton()">
-		
-		<hr>
-		<h2>Elementos del pedido</h2>
-		<div id='ListaElementos'></div>
+	<h1>Nuevo Pedido</h1>
 
-		<br>
-		<input id='element-text-input' type='text'>
-		<button id='add-button' onclick="addElementToList()">Añadir Elemento</button>
+	<hr>
+	Titulo:
+	<input type="text" id="titulo-text-input"
+		onblur="refreshSubmitButton()"
+		onchange="refreshSubmitButton()"
+		onkeydown="refreshSubmitButton()">
+
+	<hr>
+	<h2>Elementos del pedido</h2>
+	<div id='ListaElementos'></div>
+
+	<br>
+	<input id="element-text-input" type="text">
+	<button id="add-element-button" onclick="addElement()">
+		Añadir Elemento
+	</button>
 
 	<form id="NuevoPedido" action="Nuevo" method="get">
 		<input type="hidden" id="titulo" name="titulo">
 		<input type="hidden" id="elementos" name="elementos">
 	</form>
-		<hr>
-		<button id="submitFormButton" onclick="submitNuevoPedido()" disabled>Registrar Nuevo Pedido</button>
-		
+	
+	<hr>
+	<button id="submitFormButton" onclick="submitNuevoPedido()" disabled>
+		Registrar Nuevo Pedido
+	</button>
+
 </body>
 
 </html>
