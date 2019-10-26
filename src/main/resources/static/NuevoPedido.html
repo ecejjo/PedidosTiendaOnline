@@ -5,42 +5,56 @@
     
     <script type="text/javascript">
     
-	 var myList = new Array();
+					var elementsList = new Array();
 
-	function addElementToList() {
-		myList.push(document.getElementById("element-text-input").value);
-		document.getElementById("element-text-input").value = "";
-		document.getElementById("ListaElementos").innerHTML = showElementsInList();
-	}
-	
-	function deleteElementFromList(index) {
-		myList.splice(index);
-	}
+					function addElementToList() {
+						elementsList.push(document.getElementById("element-text-input").value);
+						document.getElementById("element-text-input").value = "";
+						document.getElementById("ListaElementos").innerHTML = showElementsInList();
+					}
+					function deleteElementFromList(index) {
+						console.log("Running deleteElementFromList()...");
+						console.log("deleteElementFromList(): before delete, elementsList is: " + elementsList);
+						elementsList.splice(index, 1);
+						console.log("deleteElementFromList(): after delete, elementsList is: " + elementsList);
+						document.getElementById("ListaElementos").innerHTML = showElementsInList();
+					}
 
-	function showElementsInList() {	 
-	 if (myList.length == 0 ) {
-	 	aux = "Ningún elemento en la lista.";
-	 }
-	 else {
-	 	 aux = "<ul>";
-	     for (var i = 0; i < myList.length; i ++ ) {
-	        aux += "<li>" + myList[i] + "</li>";
-	     }
-	     aux += "</ul>";
-	 }	
-     return aux;
-    }
-    
-    function submitNuevoPedido() {
-    	console.log("Running submitNuevoPedido()...");
-    	console.log("setFormVaues(): titulo-input.value is: " + document.getElementById("titulo-input").value);
-  	  	console.log("setFormVaues(): myList is: " + myList);
-    	document.getElementById("titulo").value = document.getElementById("titulo-input").value;
-	    document.getElementById("elementos").value = myList;
-	    document.forms["NuevoPedido"].submit();
-    }
+					function showElementsInList() {
+						console.log("Running showElementsInList()...");
 
-     </script>
+						if (elementsList.length == 0) {
+							aux = "Ningún elemento en la lista.";
+						} else {
+							aux = "<ul>";
+							for (var i = 0; i < elementsList.length; i++) {
+								aux += "<li>";
+								aux += elementsList[i];
+								aux += " <button id=\"delete.element." + i
+										+ "\" onclick=\"deleteElementFromList("
+										+ i + ")\">Borrar Elemento</button>";
+								aux += "</li>";
+							}
+							aux += "</ul>";
+						}
+						console.log("showElementsInList(): aux is: " + aux);
+						return aux;
+					}
+
+					function submitNuevoPedido() {
+						console.log("Running submitNuevoPedido()...");
+						console
+								.log("setFormVaues(): titulo-input.value is: "
+										+ document
+												.getElementById("titulo-input").value);
+						console.log("setFormVaues(): elementsList is: "
+								+ elementsList);
+						document.getElementById("titulo").value = document
+								.getElementById("titulo-input").value;
+						document.getElementById("elementos").value = elementsList;
+						document.forms["NuevoPedido"].submit();
+					}
+				</script>
     
 </head>
 
@@ -60,7 +74,7 @@
 		<hr>
 		
 		<input id='element-text-input' type='text'>
-		<button id='add-button' onclick="addElementToList()">Add</button>
+		<button id='add-button' onclick="addElementToList()">Añadir Elemento</button>
 
 	<form id="NuevoPedido" action="Nuevo" method="get">
 		<input type="hidden" id="titulo" name="titulo">
