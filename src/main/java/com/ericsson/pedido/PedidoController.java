@@ -1,5 +1,6 @@
 package com.ericsson.pedido;
 
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +51,18 @@ public class PedidoController {
 		return "TablonPedidos_template";
 	}
 
-	@GetMapping("/Nuevo{titulo}")
+	@GetMapping("/Nuevo{titulo}{elementos}")
 	public String NuevoPedido(Model model, 
-			@RequestParam String titulo) {
+			@RequestParam String titulo,
+			@RequestParam List<String> elementos) {
 
 		Pedido pedido = new Pedido(titulo);
+		
+		for (int index = 0; index < elementos.size(); index++) {
+			Elemento elemento = new Elemento(elementos.get(index));
+			pedido.getElementos().add(elemento);
+			elementosRepository.save(elemento);
+		}
 		pedidosRepository.save(pedido);
 
 		model.addAttribute("pedido", pedido);
