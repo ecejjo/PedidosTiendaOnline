@@ -1,23 +1,16 @@
 <html>
 
 <head>
-
-<script type="text/javascript">
-
-function confirmarBorrarPedido() {
-	if (confirm("�Borrar Pedido? [id=" + document.getElementById("pedido.id").value + "]")) {
-		document.getElementById("borrar-pedido-link").click();
-	}
-}
-</script>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../TiendaOnline.js"></script>
 </head>
 
 <body>
 
 <h1>Mostrando Pedido</h1>
 
-<p>Titulo: {{pedido.titulo}}
+<p>Título: {{pedido.titulo}}
  
 {{#pedido.elementos}}
 	<ul>
@@ -26,7 +19,7 @@ function confirmarBorrarPedido() {
 {{/pedido.elementos}}
 
 {{^pedido.elementos}}
-    <p>Todavia no hay <i>elementos</i> que mostrar.</p>
+    <p>Todavía no hay <i>elementos</i> que mostrar.</p>
 {{/pedido.elementos}}
 
 <button onclick=confirmarBorrarPedido()>Borrar Pedido</button>
@@ -36,7 +29,7 @@ function confirmarBorrarPedido() {
 
 <a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
 
- <p><a href="/">Volver a tablon de Pedidos</a>
+ <p><a href="/">Volver a tablón de Pedidos</a>
   
  </body>
  

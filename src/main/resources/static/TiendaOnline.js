@@ -64,3 +64,9 @@ function submitNuevoPedido() {
 	document.getElementById("elementos").value = elementsList;
 	document.forms["NuevoPedido"].submit();
 }
+
+function confirmarBorrarPedido() {
+	if (confirm("¿Borrar Pedido? [id=" + document.getElementById("pedido.id").value + "]")) {
+		document.getElementById("borrar-pedido-link").click();
+	}
+}
