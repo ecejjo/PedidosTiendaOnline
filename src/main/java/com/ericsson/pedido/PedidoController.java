@@ -99,7 +99,7 @@ public class PedidoController {
 			model.addAttribute("alertMessage", "Pedido no encontrado. [Id: " + id + "]");
 		}
 		model.addAttribute("pedidos", pedidosRepository.findAll());
-		return "TablonPedidos_template";
+		return "WindowLocationToTablonPedidos_template";
 	}
 
 }
