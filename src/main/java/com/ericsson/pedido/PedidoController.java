@@ -119,23 +119,30 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/Salvar{id}{titulo}{elementos}")
-	public String editarSalvarPedido(Model model,
+	public String salvarPedido(Model model,
 			@RequestParam long id,
 			@RequestParam String titulo,
 			@RequestParam List<String> elementos) {
 		
-		Optional<Pedido> Pedido = pedidosRepository.findById(id);
+		Optional<Pedido> repoPedido = pedidosRepository.findById(id);
 		
-		if(Pedido.isPresent()) {
-			// TODO: read and set here new values to Pedido
-			// pedidosRepository.save(pedido);
-			model.addAttribute("pedido", Pedido.get());
+		if(repoPedido.isPresent()) {
+			Pedido pedido = new Pedido(id);
+			pedido.setTitulo(titulo);
+			
+			for (int index = 0; index < elementos.size(); index++) {
+				Elemento elemento = new Elemento(elementos.get(index));
+				pedido.getElementos().add(elemento);
+				elementosRepository.save(elemento);
+			}
+			pedidosRepository.save(pedido);
+			model.addAttribute("pedido", repoPedido.get());
 			model.addAttribute("alertMessage", "Pedido salvado. [Id: " + id + "]");
+			return "VerPedido_template";
 		}
 		else {
 			model.addAttribute("alertMessage", "Pedido no encontrado. [Id: " + id + "]");
+			return "WindowLocationToTablonPedidos_template";
 		}
-
-		return "VerPedido_template";
 	}
 }

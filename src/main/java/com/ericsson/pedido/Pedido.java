@@ -23,10 +23,16 @@ public class Pedido {
 	
 	public Pedido() {}
 
-	public Pedido(
-			String titulo)
+	public Pedido(String titulo)
 	{
 		this.titulo = titulo;
+		this.elementos = new ArrayList<>();
+	}
+	
+	public Pedido(long id)
+	{
+		this.id = id;
+		this.titulo = "";
 		this.elementos = new ArrayList<>();
 	}
 	
@@ -40,6 +46,10 @@ public class Pedido {
 	
 	public List<Elemento> getElementos() {
 		return this.elementos;
+	}
+	
+	public void setElementos(ArrayList<Elemento> elementos) {
+		this.elementos = elementos;
 	}
 	
 	@Override

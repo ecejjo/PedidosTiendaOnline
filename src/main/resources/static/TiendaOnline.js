@@ -19,6 +19,14 @@ function addElement() {
 	showElementsInList();
 }
 
+function readElements() {
+	index = 1;
+	while(document.getElementById("element-text-input-" + index) != null) {
+		elementsList.push(document.getElementById("element-text-input-" + index).value);
+		index ++;
+	}
+}
+
 function deleteElementFromList(index) {
 	console.log("Running deleteElementFromList()...");
 	console.log("deleteElementFromList(): before delete, elementsList is: " + elementsList);
@@ -57,8 +65,7 @@ function showElementsInList() {
 function submitNuevoPedido() {
 	console.log("submitNuevoPedido(): titulo-text-input.value is: "
 			+ document.getElementById("titulo-text-input").value);
-	console.log("submitNuevoPedido(): elementsList is: "
-			+ elementsList);
+	console.log("submitNuevoPedido(): elementsList is: " + elementsList);
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
 	document.getElementById("elementos").value = elementsList;
 	document.forms["NuevoPedido"].submit();
@@ -67,8 +74,8 @@ function submitNuevoPedido() {
 function submitSalvarPedido() {
 	console.log("submitSalvarPedido(): titulo-text-input.value is: "
 			+ document.getElementById("titulo-text-input").value);
-	console.log("submitSalvarPedido(): elementsList is: "
-			+ elementsList);
+	readElements();
+	console.log("submitSalvarPedido(): elementsList is: " + elementsList);
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
 	document.getElementById("elementos").value = elementsList;
 	document.forms["SalvarPedido"].submit();

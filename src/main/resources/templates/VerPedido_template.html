@@ -8,6 +8,12 @@
 
 <body>
 
+{{#alertMessage}}
+ <script type="text/javascript">
+ 	alert("{{alertMessage}}");
+ </script>
+{{/alertMessage}}
+
 <h1>Mostrando Pedido</h1>
 
 <p>Título: {{pedido.titulo}}
