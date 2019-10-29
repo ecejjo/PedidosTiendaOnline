@@ -9,6 +9,7 @@
 <body onload="refreshSubmitButton()">
 
 <h1>Editando Pedido</h1>
+<script>editable = true;</script>
 
 <p>Título: 
 		<input type="text" id="titulo-text-input"
@@ -16,18 +17,17 @@
 		onblur="refreshSubmitButton()"
 		onchange="refreshSubmitButton()"
 		onkeydown="refreshSubmitButton()">
+
+	<hr>
+	<h2>Elementos del pedido</h2>
+    <div id='ListaElementos'>
+    </div>
  
 {{#pedido.elementos}}
-	<ul>
-		<li><input id="element-text-input-{{-index}}" type="text" value={{texto}}></li>
-	</ul>
+		<script>addElement("{{texto}}");</script>
 {{/pedido.elementos}}
 
-{{^pedido.elementos}}
-    <p>Todavía no hay <i>elementos</i> que mostrar.</p>
-{{/pedido.elementos}}
-
-    <div id='ListaElementos'></div>
+    <script type="text/javascript">showElementsList(true);</script>
 		
 	<br>
 	<input id="element-text-input" type="text">

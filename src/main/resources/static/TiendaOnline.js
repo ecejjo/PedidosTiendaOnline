@@ -3,6 +3,7 @@
  */
 
 var elementsList = new Array();
+var editable = false;
 
 function refreshSubmitButton() {
 	if (document.getElementById("titulo-text-input").value == "") {
@@ -13,10 +14,15 @@ function refreshSubmitButton() {
 	}
 }
 
-function addElement() {
-	elementsList.push(document.getElementById("element-text-input").value);
-	document.getElementById("element-text-input").value = "";
-	showElementsInList();
+function addElement(text) {
+	if (text != null) {
+		elementsList.push(text);		
+	}
+	else {
+		elementsList.push(document.getElementById("element-text-input").value);
+		document.getElementById("element-text-input").value = "";
+	}
+	showElementsList();
 }
 
 function readElements() {
@@ -32,7 +38,7 @@ function deleteElementFromList(index) {
 	console.log("deleteElementFromList(): before delete, elementsList is: " + elementsList);
 	elementsList.splice(index, 1);
 	console.log("deleteElementFromList(): after delete, elementsList is: " + elementsList);
-	showElementsInList();
+	showElementsList();
 }
 
 function addDeleteElementButton(index) {
@@ -41,16 +47,21 @@ function addDeleteElementButton(index) {
 	+ ")\">Borrar Elemento</button>";
 }
 
-function showElementsInList() {
-	console.log("Running showElementsInList()...");
-
+function showElementsList() {
 	if (elementsList.length == 0) {
 		aux = "Ningún elemento en la lista.";
 	} else {
 		aux = "<ul>";
 		for (var i = 0; i < elementsList.length; i++) {
 			aux += "<li>";
-			aux += elementsList[i];
+			if (editable == true) {
+				type = "type=\"text\"";
+			}
+			else {
+				aux += elementsList[i];
+				type = "type=\"hidden\"";
+			}
+			aux += "<input " + type + "id=\"element-text-input-{{-index}}\" type=\"text\" value=\"" + elementsList[i] + "\">";
 			if (elementsList.length > 1) {
 				aux += addDeleteElementButton(i);
 			}
@@ -58,7 +69,6 @@ function showElementsInList() {
 		}
 		aux += "</ul>";
 	}
-	console.log("showElementsInList(): aux is: " + aux);
 	document.getElementById("ListaElementos").innerHTML = aux;
 }
 
