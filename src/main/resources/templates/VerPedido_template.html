@@ -22,10 +22,7 @@
     <p>Todavía no hay <i>elementos</i> que mostrar.</p>
 {{/pedido.elementos}}
 
-<button onclick=confirmarBorrarPedido()>Borrar Pedido</button>
-<form id="BorrarForm" method="get" action="Borrar">
-	<input type="hidden" id=pedido.id name="id" value="{{pedido.id}}">
-</form>
+<button onclick=confirmarBorrarPedido({{pedido.id}})>Borrar Pedido</button>
 
 <a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
 

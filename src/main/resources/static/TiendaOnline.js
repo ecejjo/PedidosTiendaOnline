@@ -65,8 +65,8 @@ function submitNuevoPedido() {
 	document.forms["NuevoPedido"].submit();
 }
 
-function confirmarBorrarPedido() {
-	if (confirm("¿Borrar Pedido? [id=" + document.getElementById("pedido.id").value + "]")) {
+function confirmarBorrarPedido(pedidoId) {
+	if (confirm("¿Borrar Pedido? [id=" + pedidoId + "]")) {
 		document.getElementById("borrar-pedido-link").click();
 	}
 }
