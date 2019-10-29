@@ -18,15 +18,16 @@
 
 <p>Título: {{pedido.titulo}}
  
+	<hr>
+	<h2>Elementos del pedido</h2>
+    <div id='ListaElementos'>
+    </div>
+ 
 {{#pedido.elementos}}
-	<ul>
-		<li>{{texto}}</li>
-	</ul>
+		<script>addElement("{{texto}}");</script>
 {{/pedido.elementos}}
 
-{{^pedido.elementos}}
-    <p>Todavía no hay <i>elementos</i> que mostrar.</p>
-{{/pedido.elementos}}
+	<script>showElementsList();</script>
 
 <hr>
 <a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>

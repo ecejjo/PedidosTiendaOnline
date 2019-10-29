@@ -43,16 +43,16 @@ function showElementsList() {
 		html = "<ul>";
 		for (var i = 0; i < elementsList.length; i++) {
 			html += "<li>";
+			html += "<input ";
 			if (editable == true) {
-				type = "type=\"text\" ";
+				html += "type=\"text\" ";
 			}
 			else {
-				html += elementsList[i];
-				type = "type=\"hidden\" ";
+				html += "type=\"checkbox\" onchange=\"showElementsList()\" ";
 			}
-			html += "<input " + type; 
 			html += "id=\"element-text-input-{{-index}}\" ";
 			html += "value=\"" + elementsList[i] + "\">";
+			html += elementsList[i];
 			
 			if (elementsList.length > 1) {
 				html += addDeleteElementButton(i);
