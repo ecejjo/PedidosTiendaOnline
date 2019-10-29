@@ -101,5 +101,41 @@ public class PedidoController {
 		model.addAttribute("pedidos", pedidosRepository.findAll());
 		return "WindowLocationToTablonPedidos_template";
 	}
+	
+	@GetMapping("/Editar/{id}")
+	public String editarPedido(Model model,
+			@PathVariable long id) {
+		
+		Optional<Pedido> Pedido = pedidosRepository.findById(id);
+		
+		if(Pedido.isPresent()) {
+			model.addAttribute("pedido", Pedido.get());
+		}
+		else {
+			model.addAttribute("alertMessage", "Pedido no encontrado. [Id: " + id + "]");
+		}
+		model.addAttribute("pedidos", pedidosRepository.findAll());
+		return "EditarPedido_template";
+	}
+	
+	@GetMapping("/Salvar{id}{titulo}{elementos}")
+	public String editarSalvarPedido(Model model,
+			@RequestParam long id,
+			@RequestParam String titulo,
+			@RequestParam List<String> elementos) {
+		
+		Optional<Pedido> Pedido = pedidosRepository.findById(id);
+		
+		if(Pedido.isPresent()) {
+			// TODO: read and set here new values to Pedido
+			// pedidosRepository.save(pedido);
+			model.addAttribute("pedido", Pedido.get());
+			model.addAttribute("alertMessage", "Pedido salvado. [Id: " + id + "]");
+		}
+		else {
+			model.addAttribute("alertMessage", "Pedido no encontrado. [Id: " + id + "]");
+		}
 
+		return "VerPedido_template";
+	}
 }

@@ -34,6 +34,10 @@ public class Pedido {
 		return this.titulo;
 	}
 	
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	
 	public List<Elemento> getElementos() {
 		return this.elementos;
 	}

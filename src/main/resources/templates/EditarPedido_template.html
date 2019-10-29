@@ -1,0 +1,53 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../TiendaOnline.js"></script>
+</head>
+
+<body onload="refreshSubmitButton()">
+
+<h1>Editando Pedido</h1>
+
+<p>Título: 
+		<input type="text" id="titulo-text-input"
+		value="{{pedido.titulo}}"
+		onblur="refreshSubmitButton()"
+		onchange="refreshSubmitButton()"
+		onkeydown="refreshSubmitButton()">
+ 
+{{#pedido.elementos}}
+	<ul>
+		<li>	<input id="element-text-input" type="text" value={{texto}}></li>
+	</ul>
+{{/pedido.elementos}}
+
+{{^pedido.elementos}}
+    <p>Todavía no hay <i>elementos</i> que mostrar.</p>
+{{/pedido.elementos}}
+
+    <div id='ListaElementos'></div>
+		
+	<br>
+	<input id="element-text-input" type="text">
+	<button id="add-element-button" onclick="addElement()">
+		Añadir Elemento
+	</button>
+	
+	<form id="SalvarPedido" action="/Salvar" method="get">
+		<input type="hidden" id="id" name="id" value="{{pedido.id}}">
+		<input type="hidden" id="titulo" name="titulo">
+		<input type="hidden" id="elementos" name="elementos">
+	</form>
+	
+	<hr>
+	<button id="submitFormButton" onclick="submitSalvarPedido()" disabled>
+		Salvar Pedido
+	</button>
+
+ <p><a href="/">Volver a tablón de Pedidos</a>
+  
+ </body>
+ 
+</html>

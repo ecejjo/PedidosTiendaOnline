@@ -55,18 +55,32 @@ function showElementsInList() {
 }
 
 function submitNuevoPedido() {
-	console.log("setFormVaues(): titulo-text-input.value is: "
+	console.log("submitNuevoPedido(): titulo-text-input.value is: "
 			+ document.getElementById("titulo-text-input").value);
-	console.log("setFormVaues(): elementsList is: "
+	console.log("submitNuevoPedido(): elementsList is: "
 			+ elementsList);
-	document.getElementById("titulo").value = document
-	.getElementById("titulo-text-input").value;
+	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
 	document.getElementById("elementos").value = elementsList;
 	document.forms["NuevoPedido"].submit();
 }
+
+function submitSalvarPedido() {
+	console.log("submitSalvarPedido(): titulo-text-input.value is: "
+			+ document.getElementById("titulo-text-input").value);
+	console.log("submitSalvarPedido(): elementsList is: "
+			+ elementsList);
+	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
+	document.getElementById("elementos").value = elementsList;
+	document.forms["SalvarPedido"].submit();
+}
+
 
 function confirmarBorrarPedido(pedidoId) {
 	if (confirm("¿Borrar Pedido? [id=" + pedidoId + "]")) {
 		document.getElementById("borrar-pedido-link").click();
 	}
 }
+function editarPedido(pedidoId) {
+	document.getElementById("editar-pedido-link").click();
+}
+

@@ -22,12 +22,17 @@
     <p>Todavía no hay <i>elementos</i> que mostrar.</p>
 {{/pedido.elementos}}
 
+<hr>
+<a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
 <button onclick=confirmarBorrarPedido({{pedido.id}})>Borrar Pedido</button>
 
-<a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
+<hr>
+<a href="/Editar/{{pedido.id}}" id="editar-pedido-link" style="visibility: hidden"></a>
+<button onclick=editarPedido({{pedido.id}})>Editar Pedido</button>
 
- <p><a href="/">Volver a tablón de Pedidos</a>
+<hr>
+<a href="/">Volver a tablón de Pedidos</a>
   
- </body>
+</body>
  
 </html>
