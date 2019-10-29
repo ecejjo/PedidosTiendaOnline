@@ -27,13 +27,11 @@
 		<script>addElement("{{texto}}");</script>
 {{/pedido.elementos}}
 
-    <script type="text/javascript">showElementsList(true);</script>
+	<script>showElementsList();</script>
 		
 	<br>
 	<input id="element-text-input" type="text">
-	<button id="add-element-button" onclick="addElement()">
-		Añadir Elemento
-	</button>
+	<button id="add-element-button" onclick="addElement()">Añadir Elemento</button>
 	
 	<form id="SalvarPedido" action="/Salvar" method="get">
 		<input type="hidden" id="id" name="id" value="{{pedido.id}}">
@@ -43,7 +41,7 @@
 	
 	<hr>
 	<button id="submitFormButton" onclick="submitSalvarPedido()" disabled>
-		Salvar Pedido
+		Salvar Pedido Existente
 	</button>
 
  <p><a href="/">Volver a tablón de Pedidos</a>

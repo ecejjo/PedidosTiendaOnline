@@ -7,7 +7,7 @@
 </head>
 
 
-<body onload=showElementsInList()>
+<body onload=showElementsList()>
 
 	<h1>Nuevo Pedido</h1>
 
@@ -24,9 +24,7 @@
 
 	<br>
 	<input id="element-text-input" type="text">
-	<button id="add-element-button" onclick="addElement()">
-		Añadir Elemento
-	</button>
+	<button id="add-element-button" onclick="addElement()">Añadir Elemento</button>
 
 	<form id="NuevoPedido" action="Nuevo" method="get">
 		<input type="hidden" id="titulo" name="titulo">
@@ -35,7 +33,7 @@
 	
 	<hr>
 	<button id="submitFormButton" onclick="submitNuevoPedido()" disabled>
-		Registrar Nuevo Pedido
+		Registrar Pedido Nuevo
 	</button>
 
 	 <p><a href="/">Volver a tablon de Pedidos</a>

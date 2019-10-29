@@ -4,6 +4,13 @@
 </head>
 
 <body onload="window.location = 'http://localhost:8080/'">
+
+{{#alertMessage}}
+ <script type="text/javascript">
+ 	alert("{{alertMessage}}");
+ </script>
+{{/alertMessage}}
+
 </body>
 
 </html>

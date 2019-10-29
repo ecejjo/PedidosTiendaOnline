@@ -25,19 +25,8 @@ function addElement(text) {
 	showElementsList();
 }
 
-function readElements() {
-	index = 1;
-	while(document.getElementById("element-text-input-" + index) != null) {
-		elementsList.push(document.getElementById("element-text-input-" + index).value);
-		index ++;
-	}
-}
-
 function deleteElementFromList(index) {
-	console.log("Running deleteElementFromList()...");
-	console.log("deleteElementFromList(): before delete, elementsList is: " + elementsList);
 	elementsList.splice(index, 1);
-	console.log("deleteElementFromList(): after delete, elementsList is: " + elementsList);
 	showElementsList();
 }
 
@@ -49,43 +38,48 @@ function addDeleteElementButton(index) {
 
 function showElementsList() {
 	if (elementsList.length == 0) {
-		aux = "Ningún elemento en la lista.";
+		html = "Ningún elemento en la lista.";
 	} else {
-		aux = "<ul>";
+		html = "<ul>";
 		for (var i = 0; i < elementsList.length; i++) {
-			aux += "<li>";
+			html += "<li>";
 			if (editable == true) {
-				type = "type=\"text\"";
+				type = "type=\"text\" ";
 			}
 			else {
-				aux += elementsList[i];
-				type = "type=\"hidden\"";
+				html += elementsList[i];
+				type = "type=\"hidden\" ";
 			}
-			aux += "<input " + type + "id=\"element-text-input-{{-index}}\" type=\"text\" value=\"" + elementsList[i] + "\">";
+			html += "<input " + type; 
+			html += "id=\"element-text-input-{{-index}}\" ";
+			html += "value=\"" + elementsList[i] + "\">";
+			
 			if (elementsList.length > 1) {
-				aux += addDeleteElementButton(i);
+				html += addDeleteElementButton(i);
 			}
-			aux += "</li>";
+			html += "</li>";
 		}
-		aux += "</ul>";
+		html += "</ul>";
 	}
-	document.getElementById("ListaElementos").innerHTML = aux;
+	document.getElementById("ListaElementos").innerHTML = html;
 }
 
 function submitNuevoPedido() {
-	console.log("submitNuevoPedido(): titulo-text-input.value is: "
-			+ document.getElementById("titulo-text-input").value);
-	console.log("submitNuevoPedido(): elementsList is: " + elementsList);
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
 	document.getElementById("elementos").value = elementsList;
 	document.forms["NuevoPedido"].submit();
 }
 
+function readElementsInForm() {
+	index = 1;
+	while(document.getElementById("element-text-input-" + index) != null) {
+		elementsList.push(document.getElementById("element-text-input-" + index).value);
+		index ++;
+	}
+}
+
 function submitSalvarPedido() {
-	console.log("submitSalvarPedido(): titulo-text-input.value is: "
-			+ document.getElementById("titulo-text-input").value);
-	readElements();
-	console.log("submitSalvarPedido(): elementsList is: " + elementsList);
+	readElementsInForm();
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
 	document.getElementById("elementos").value = elementsList;
 	document.forms["SalvarPedido"].submit();
