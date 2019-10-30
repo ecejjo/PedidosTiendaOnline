@@ -13,13 +13,14 @@ public class Elemento {
 	private long id;
 	
 	String texto;
+	boolean strike;
 	
 	public Elemento() {}
 	
-	public Elemento(
-			String texto)
+	public Elemento(String texto)
 	{
 		this.texto = texto;
+		this.strike = false;
 	}
 
 	@Override

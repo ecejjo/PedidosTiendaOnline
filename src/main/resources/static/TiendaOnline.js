@@ -42,12 +42,6 @@ function getInputHtml(type, id, value, onchange, extraAttributes) {
 	return html;
 }
 
-function addDeleteElementButton(index) {
-	return " <button id=\"delete.element." + index
-	+ "\" onclick=\"deleteElementFromList(" + index
-	+ ")\">Borrar Elemento</button>";
-}
-
 function getButtonHtml(id, value, onclick) {
 	var html = "<button ";
 	if ( (id != null) && (id != "") ) html +="id=\"" + id + "\"";
@@ -85,13 +79,18 @@ function showElementsList() {
 		html += "<ul>";
 		for (var i = 0; i < elementsList.length; i++) {
 			html += "<li>";
-			if (editable == true) {
-				// html += getInputHtml("checkbox", "element-text-input-" + i, elementsList[i], "showElementsList()");
-				html += getInputHtml("text", "element-text-input-" + i, elementsList[i], "showElementsList()");
+			
+			extraAttributes = "";
+			if (elementsList[i].strike == true) {
+				extraAttributes = "checked";
 			}
-			else {
-				html += getInputHtml("text", "element-text-input-" + i, elementsList[i], "showElementsList()", "disabled");
+			html += getInputHtml("checkbox", "element-checkbox-input-" + i, "", "readElementsInForm()", extraAttributes);
+
+			extraAttributes = "";
+			if (editable == false) {
+				extraAttributes = "disabled";
 			}
+			html += getInputHtml("text", "element-text-input-" + i, elementsList[i], "readElementsInForm()", extraAttributes);
 			
 			if (elementsList.length > 1) {
 				html += getButtonHtml("delete.element." + i, "Borrar Elemento", "deleteElementFromList(" + i + ")");
@@ -110,11 +109,13 @@ function submitNuevoPedido() {
 }
 
 function readElementsInForm() {
-	index = 1;
+	index = 0;
+	elementsList = new Array();
 	while(document.getElementById("element-text-input-" + index) != null) {
 		elementsList.push(document.getElementById("element-text-input-" + index).value);
 		index ++;
 	}
+	console.log("readElementsInForm(): elementsList is:" + elementsList);
 }
 
 function submitSalvarPedido() {

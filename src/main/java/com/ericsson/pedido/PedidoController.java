@@ -22,27 +22,39 @@ public class PedidoController {
 	@PostConstruct
 	public void init() {
 
-		Pedido pedido = new Pedido("Titulo de Pedido1: con un elemento");
+		Pedido pedido = new Pedido("Titulo de Pedido 1: con un elemento");
 		Elemento elemento = new Elemento("Pedido1.Elemento1");
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 		pedidosRepository.save(pedido);
 
-		pedido = new Pedido("Titulo de Pedido2: con 2 elementos");
+		pedido = new Pedido("Titulo de Pedido 2: con 2 elementos");
 		
-		elemento = new Elemento("Pedido2.Elemento1");
+		elemento = new Elemento("Pedido 2 - Elemento 1");
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 
-		elemento = new Elemento("Pedido2.Elemento2");
+		elemento = new Elemento("Pedido 2 - Elemento 2");
+		elementosRepository.save(elemento);
+		pedido.getElementos().add(elemento);
+		pedidosRepository.save(pedido);
+		
+		pedido = new Pedido("Titulo de Pedido 3: sin elementos");
+		pedidosRepository.save(pedido);
+
+		pedido = new Pedido("Titulo de Pedido 4: con elemento tachados");
+		
+		elemento = new Elemento("Pedido 4 - Elemento 1 - Tachado");
+		elemento.strike = true;
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 
-		pedidosRepository.save(pedido);
-		
-		pedido = new Pedido("Titulo de Pedido3: sin elementos");
+		elemento = new Elemento("Pedido 4 - Elemento 2 - No tachado");
+		elementosRepository.save(elemento);
+		pedido.getElementos().add(elemento);
 		pedidosRepository.save(pedido);
 
+		pedidosRepository.save(pedido);
 	}
 
 	@GetMapping("/")	
