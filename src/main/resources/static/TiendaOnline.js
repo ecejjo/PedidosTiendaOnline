@@ -30,32 +30,71 @@ function deleteElementFromList(index) {
 	showElementsList();
 }
 
+function getInputHtml(type, id, value, onchange, extraAttributes) {
+	var html = "<input ";
+	if ( (type != null) && (type != "") ) html +="type=\"" + type + "\"";
+	if ( (id != null) && (id != "") ) html +="id=\"" + id + "\"";
+	if ( (value != null) && (value != "") ) html +="value=\"" + value + "\"";
+	if ( (onchange != null) && (onchange != "") ) html +=" onchange=\"" + onchange + "\"";
+	if ( (extraAttributes != null) && (extraAttributes != "") ) html += extraAttributes;
+	html+= ">";
+	console.log("getInputHtml(): html is:" + html);
+	return html;
+}
+
 function addDeleteElementButton(index) {
 	return " <button id=\"delete.element." + index
 	+ "\" onclick=\"deleteElementFromList(" + index
 	+ ")\">Borrar Elemento</button>";
 }
 
+function getButtonHtml(id, value, onclick) {
+	var html = "<button ";
+	if ( (id != null) && (id != "") ) html +="id=\"" + id + "\"";
+	if ( (onclick != null) && (onclick != "") ) html +=" onclick=\"" + onclick + "\"";
+	html+= ">";
+	if ( (value != null) && (value != "") ) html += value;
+	html+= "</button>";
+	console.log("getButtonHtml(): html is:" + html);
+	return html;
+}
+
+
+function getUlHtml(arrayList) {
+	console.log("getUlHtml(): arrayList is: " + arrayList);
+	var htmlUl = "<ul>";
+	for (var i=0; i<arrayList.lenght; i++) {
+		htmlUl += arrayList[i];
+	}
+	htmlUl += "</ul>";
+	return htmlUl;
+}
+
+function getLiHtml(value) {
+	return "<li>" + value + "</li>";
+}
+
+
 function showElementsList() {
+	
+	var html = "";
+	
 	if (elementsList.length == 0) {
-		html = "Ningún elemento en la lista.";
+		html += "Ningún elemento en la lista.";
 	} else {
-		html = "<ul>";
+		html += "<ul>";
 		for (var i = 0; i < elementsList.length; i++) {
 			html += "<li>";
-			html += "<input ";
 			if (editable == true) {
-				html += "type=\"text\" ";
+				// html += getInputHtml("checkbox", "element-text-input-" + i, elementsList[i], "showElementsList()");
+				html += getInputHtml("text", "element-text-input-" + i, elementsList[i], "showElementsList()");
 			}
 			else {
-				html += "type=\"checkbox\" onchange=\"showElementsList()\" ";
+				html += getInputHtml("text", "element-text-input-" + i, elementsList[i], "showElementsList()", "disabled");
 			}
-			html += "id=\"element-text-input-{{-index}}\" ";
-			html += "value=\"" + elementsList[i] + "\">";
-			html += elementsList[i];
 			
 			if (elementsList.length > 1) {
-				html += addDeleteElementButton(i);
+				html += getButtonHtml("delete.element." + i, "Borrar Elemento", "deleteElementFromList(" + i + ")");
 			}
 			html += "</li>";
 		}
