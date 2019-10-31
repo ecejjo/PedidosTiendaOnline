@@ -7,34 +7,30 @@
 </head>
 
 
-<body onload=showElementsList()>
+<body>
 
 	<h1>Nuevo Pedido</h1>
 
 	<hr>
 	Titulo:
-	<input type="text" id="titulo-text-input"
-		onblur="refreshSubmitButton()"
-		onchange="refreshSubmitButton()"
-		onkeydown="refreshSubmitButton()">
+	<form id="NuevoPedido" action="Nuevo" method="get">
+	<input type="text" id="titulo-text-input" name="titulo">
+	<input type="hidden" id="elementos" name="elementos">
 
 	<hr>
-	<h2>Elementos del pedido</h2>
-	<div id='ListaElementos'></div>
+	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
+	<p id=ListaElementosText></p>
+	<ul id='ListaElementos'></ul>
 
 	<br>
 	<input id="element-text-input" type="text">
-	<button id="add-element-button" onclick="addElement()">Añadir Elemento</button>
-
-	<form id="NuevoPedido" action="Nuevo" method="get">
-		<input type="hidden" id="titulo" name="titulo">
-		<input type="hidden" id="elementos" name="elementos">
-	</form>
+	<button id="add-element-button" type="button">Añadir Elemento</button>
 	
 	<hr>
-	<button id="submitFormButton" onclick="submitNuevoPedido()" disabled>
+	<button id="submitFormButton" disabled>
 		Registrar Pedido Nuevo
 	</button>
+	</form>
 
 	 <p><a href="/">Volver a tablon de Pedidos</a>
 
