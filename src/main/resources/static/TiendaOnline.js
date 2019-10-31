@@ -27,14 +27,19 @@ function refreshListaElementosText() {
 	console.log("refreshListaElementosText(): done.")
 }
 
-function addToListaElementos() {
+function addToListaElementos(text) {
 	
 	id = Math.random().toString(36).substring(2, 15);
 	// id = Date.now();
 	
 	aux = "<li id = " + id + ">";
 	aux += "<input type=text ";
-	aux += "value = '" + $('input#element-text-input').val() + "' ";
+	
+	if (text == null) {
+		aux += "value = '" + $('input#element-text-input').val() + "' ";
+	} else {
+		aux += "value = '" + text + "' ";		
+	}
 	aux += ">";
 	aux += "<button style='display:none;' ";
 	aux += "onclick='deleteFromListaElementos(\"" + id + "\")'";
