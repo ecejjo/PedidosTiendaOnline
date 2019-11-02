@@ -27,6 +27,11 @@
 		<script>addToListaElementos("{{texto}}");</script>
 {{/pedido.elementos}}
 
+<script>
+	$('ul#ListaElementos > li > input').prop("disabled", true);
+	$('ul#ListaElementos > li > button').prop("disabled", true);
+</script>
+
 <hr>
 <a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
 <button onclick=confirmarBorrarPedido({{pedido.id}})>Borrar Pedido</button>
