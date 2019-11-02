@@ -2,15 +2,13 @@
  * 
  */
 
-function refreshSubmitButton() {
-	console.log("refreshSubmitButton(): starting ...")
-	if (document.getElementById("titulo-text-input").value == "") {
-		document.getElementById("submitFormButton").disabled = true;
+function enableDisableSubmitButton() {
+	if ($('input#titulo-text-input').val() == "") {
+		$('button#submitFormButton').prop("disabled", true);
 	}
 	else {
-		document.getElementById("submitFormButton").disabled = false;
+		$('button#submitFormButton').prop("disabled", false);
 	}
-	console.log("refreshSubmitButton(): Done.")
 }
 
 function refreshListaElementosText() {
@@ -156,7 +154,7 @@ function editarPedido(pedidoId) {
 $( document ).ready(function() {
 	
     console.log( "Document ready!" );
-    $('input#titulo-text-input').blur(refreshSubmitButton);
+    $('input#titulo-text-input').blur(enableDisableSubmitButton);
     $('button#add-element-button').click(addInputToListaElementos);
     refreshListaElementosText();
 });
