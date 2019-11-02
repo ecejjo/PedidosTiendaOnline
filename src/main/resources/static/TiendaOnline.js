@@ -27,21 +27,20 @@ function refreshListaElementosText() {
 	console.log("refreshListaElementosText(): done.")
 }
 
-function addToListaElementos(text) {
+function addInputToListaElementos() {
+	addToListaElementos($('input#element-text-input').val());
+}
+
+function addToListaElementos(value) {
 	
 	id = Math.random().toString(36).substring(2, 15);
 	// id = Date.now();
 	
 	aux = "<li id = " + id + ">";
 	aux += "<input type=text ";
-	
-	if (text == null) {
-		aux += "value = '" + $('input#element-text-input').val() + "' ";
-	} else {
-		aux += "value = '" + text + "' ";		
-	}
+	aux += "value = '" + value + "' ";
 	aux += ">";
-	aux += "<button style='display:none;' ";
+	aux += "<button type=button style='display:none;' ";
 	aux += "onclick='deleteFromListaElementos(\"" + id + "\")'";
 	// aux += "onclick='deleteFromListaElementos($(this).parent().id)'";
 	// aux += "onclick=$(" + id + ").remove()";
@@ -60,7 +59,8 @@ function addToListaElementos(text) {
 
 function deleteFromListaElementos(id) {
 	console.log("id is: " + id);
-	$(id).remove("li");
+	// $(id).remove("li");
+	$(id).remove();
 	// $(id).detach();
     // $(this).parent().remove();
 	refreshDeleteButtonsInListaElementos();
@@ -208,7 +208,7 @@ $( document ).ready(function() {
 	
     console.log( "Document ready!" );
     $('input#titulo-text-input').blur(refreshSubmitButton);
-    $('button#add-element-button').click(addToListaElementos);
+    $('button#add-element-button').click(addInputToListaElementos);
     refreshListaElementosText();
 });
 

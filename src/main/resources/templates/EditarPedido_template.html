@@ -6,43 +6,35 @@
     <script src="../TiendaOnline.js"></script>
 </head>
 
-<body onload="refreshSubmitButton()">
+<body>
 
-<h1>Editando Pedido</h1>
-<script>editable = true;</script>
-
-<p>Título: 
-		<input type="text" id="titulo-text-input"
-		value="{{pedido.titulo}}"
-		onblur="refreshSubmitButton()"
-		onchange="refreshSubmitButton()"
-		onkeydown="refreshSubmitButton()">
+	<h1>Editar Pedido</h1>
 
 	<hr>
-	<h2>Elementos del pedido</h2>
-    <div id='ListaElementos'>
-    </div>
+	Titulo:
+	<form id="SalvarPedido" action="/Salvar" method="get">
+	<input type="hidden" id="id" name="id" value="{{pedido.id}}">
+	<input type="text" id="titulo-text-input" name="titulo" value="{{pedido.titulo}}">
+	<input type="hidden" id="elementos" name="elementos">
+
+	<hr>
+	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
+	<p id=ListaElementosText></p>
+	<ul id='ListaElementos'></ul>
  
 {{#pedido.elementos}}
-		<script>addElement("{{texto}}");</script>
+		<script>addToListaElementos("{{texto}}");</script>
 {{/pedido.elementos}}
 
-	<script>showElementsList();</script>
-		
 	<br>
 	<input id="element-text-input" type="text">
-	<button id="add-element-button" onclick="addElement()">Añadir Elemento</button>
-	
-	<form id="SalvarPedido" action="/Salvar" method="get">
-		<input type="hidden" id="id" name="id" value="{{pedido.id}}">
-		<input type="hidden" id="titulo" name="titulo">
-		<input type="hidden" id="elementos" name="elementos">
-	</form>
-	
+	<button id="add-element-button" type="button">Añadir Elemento</button>
+		
 	<hr>
-	<button id="submitFormButton" onclick="submitSalvarPedido()" disabled>
+	<button id="submitFormButton" onclick="submitSalvarPedido()">
 		Salvar Pedido Existente
 	</button>
+	</form>
 
  <p><a href="/">Volver a tablón de Pedidos</a>
   
