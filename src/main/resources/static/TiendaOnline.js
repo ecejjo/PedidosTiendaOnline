@@ -26,7 +26,11 @@ function addToListaElementos(value) {
 	// id = Date.now();
 	
 	aux = "<li id = " + id + ">";
-	
+
+	aux += "<input type=checkbox ";
+	aux += "onclick='strikeInputText(\"" + id + "\")'";
+	aux += ">";		
+
 	aux += "<input type=text ";
 	aux += "value = '" + value + "' ";
 	aux += ">";
@@ -50,6 +54,12 @@ function removeLi(id) {
     // $(this).parent().remove();
 	refreshForm();
 }
+
+function strikeInputText(id) {
+	$('#' + id + " > input").toggleClass('strike');
+	refreshForm();
+}
+
 
 function refreshForm() {
 	refreshListaElementosText();
@@ -105,7 +115,6 @@ function editarPedido(pedidoId) {
 
 //A $( document ).ready() block.
 $( document ).ready(function() {
-	
     console.log( "Document ready!" );
     $('input#titulo-text-input').blur(enableDisableSubmitButton);
     $('button#add-element-button').click(addInputToListaElementos);
