@@ -71,13 +71,35 @@ function refreshForm() {
 function refreshInputElementos() {
 	
 	var elementsArray = new Array();
-
-	$("ul#ListaElementos > li > input:text").each(function( index ) {
+	
+	var checkboxArray = new Array();
+	$("ul#ListaElementos > li > input:checkbox").each(function( index ) {
 		console.log("value is:" + index + ": " + $( this ).val() );
-		elementsArray.push($(this).val());
+		if ($(this).is(":checked")) {
+			checkboxArray.push(true);	
+		}
+		else {
+			checkboxArray.push(false);
+		}
 	});
 	
-	$('input#elementos').val(elementsArray);
+	var textArray = new Array();
+	$("ul#ListaElementos > li > input:text").each(function( index ) {
+		console.log("value is:" + index + ": " + $( this ).val() );
+		textArray.push($(this).val());
+	});
+	
+	for (var i = 0; i < checkboxArray.length; i++) {
+		elementsArray.push("{ \"strike\":" + 
+				checkboxArray[i] + 
+				", \"texto\":\"" + 
+				textArray[i] + "\"}");
+	}
+
+	console.log("refreshInputElementos(): elementsArray is:" + elementsArray);
+	aux = "[" + elementsArray + "]";
+	console.log("aux is:" + aux);
+	$('input#elementos').val(aux);
 }
 
 function refreshDeleteButtons() {

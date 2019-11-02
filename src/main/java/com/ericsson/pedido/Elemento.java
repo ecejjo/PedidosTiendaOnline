@@ -12,8 +12,8 @@ public class Elemento {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	String texto;
 	boolean strike;
+	String texto;
 	
 	public Elemento() {}
 	

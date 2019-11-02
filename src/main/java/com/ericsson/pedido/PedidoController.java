@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 @Controller
 public class PedidoController {
 
@@ -134,16 +139,21 @@ public class PedidoController {
 	public String salvarPedido(Model model,
 			@RequestParam long id,
 			@RequestParam String titulo,
-			@RequestParam List<String> elementos) {
+			@RequestParam String elementos) {
 		
 		Optional<Pedido> repoPedido = pedidosRepository.findById(id);
 		
 		if(repoPedido.isPresent()) {
 			Pedido pedido = new Pedido(id);
 			pedido.setTitulo(titulo);
-			
-			for (int index = 0; index < elementos.size(); index++) {
-				Elemento elemento = new Elemento(elementos.get(index));
+						
+	        JsonParser parser = new JsonParser();
+	        JsonArray gsonArr = parser.parse(elementos).getAsJsonArray();
+	        for (JsonElement obj : gsonArr) {
+	            JsonObject gsonObj = obj.getAsJsonObject();
+
+				Elemento elemento = new Elemento (gsonObj.get("texto").getAsString());
+				elemento.setStrike(gsonObj.get("strike").getAsBoolean());
 				pedido.getElementos().add(elemento);
 				elementosRepository.save(elemento);
 			}
