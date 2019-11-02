@@ -58,9 +58,8 @@ function addToListaElementos(value) {
 }
 
 function deleteFromListaElementos(id) {
-	console.log("id is: " + id);
-	// $(id).remove("li");
-	$(id).remove();
+	console.log("deleteFromListaElementos(): id is: " + id);
+	$('#' + id).remove("li");
 	// $(id).detach();
     // $(this).parent().remove();
 	refreshDeleteButtonsInListaElementos();
