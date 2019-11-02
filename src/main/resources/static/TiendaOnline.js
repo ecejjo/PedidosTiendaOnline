@@ -12,14 +12,12 @@ function enableDisableSubmitButton() {
 }
 
 function refreshListaElementosText() {
-	console.log("refreshListaElementosText(): length is:" + $('ul#ListaElementos').children().length);
 	if ($('ul#ListaElementos').children().length == 0) {
 		$('p#ListaElementosText').text("No hay elementos en la lista.");		
 	}
 	else {
 		$('p#ListaElementosText').text("Hay elementos");		
 	}
-	console.log("refreshListaElementosText(): done.")
 }
 
 function addInputToListaElementos() {
@@ -27,7 +25,6 @@ function addInputToListaElementos() {
 }
 
 function addToListaElementos(value) {
-	
 	id = Math.random().toString(36).substring(2, 15);
 	// id = Date.now();
 	
@@ -36,22 +33,18 @@ function addToListaElementos(value) {
 	aux += "value = '" + value + "' ";
 	aux += ">";
 	aux += "<button type=button style='display:none;' ";
-	aux += "onclick='deleteFromListaElementos(\"" + id + "\")'";
-	// aux += "onclick='deleteFromListaElementos($(this).parent().id)'";
-	// aux += "onclick=$(" + id + ").remove()";
+	aux += "onclick='removeLi(\"" + id + "\")'";
 	aux += ">";
 	aux += "Borrar Elemento";
 	aux += "</button>";
 	aux += "</li>"
 		
 	$('ul#ListaElementos').append(aux);
-	$('input#element-text-input').val("");
 	
 	refreshForm();
 }
 
-function deleteFromListaElementos(id) {
-	console.log("deleteFromListaElementos(): id is: " + id);
+function removeLi(id) {
 	$('#' + id).remove("li");
 	// $(id).detach();
     // $(this).parent().remove();
@@ -60,25 +53,24 @@ function deleteFromListaElementos(id) {
 
 function refreshForm() {
 	refreshListaElementosText();
-	refreshElementosFromList();
-	refreshDeleteButtonsInListaElementos();
+	refreshInputElementos();
+	refreshDeleteButtons();
+	$('input#element-text-input').val("");
 }
 
-function refreshElementosFromList() {
-
-	console.log("refreshElementosFromList(): running ...")
+function refreshInputElementos() {
 	
 	var elementsArray = new Array();
 
 	$("ul#ListaElementos > li > input").each(function( index ) {
 		console.log("value is:" + index + ": " + $( this ).val() );
-		elementsArray.push($( this ).val());
+		elementsArray.push($(this).val());
 	});
 	
 	$('input#elementos').val(elementsArray);
 }
 
-function refreshDeleteButtonsInListaElementos() {
+function refreshDeleteButtons() {
 	if ($('ul#ListaElementos').children().length > 1) {
 		// $('ul#ListaElementos > li > button').css("display", "block");
 		$('ul#ListaElementos > li > button').show();
@@ -89,45 +81,6 @@ function refreshDeleteButtonsInListaElementos() {
 		$('ul#ListaElementos > li > button').css("display", "none");
 	}
 }
-
-function getInputHtml(type, id, value, onchange, extraAttributes) {
-	var html = "<input ";
-	if ( (type != null) && (type != "") ) html +="type=\"" + type + "\"";
-	if ( (id != null) && (id != "") ) html +="id=\"" + id + "\"";
-	if ( (value != null) && (value != "") ) html +="value=\"" + value + "\"";
-	if ( (onchange != null) && (onchange != "") ) html +=" onchange=\"" + onchange + "\"";
-	if ( (extraAttributes != null) && (extraAttributes != "") ) html += extraAttributes;
-	html+= ">";
-	console.log("getInputHtml(): html is:" + html);
-	return html;
-}
-
-function getButtonHtml(id, value, onclick) {
-	var html = "<button ";
-	if ( (id != null) && (id != "") ) html +="id=\"" + id + "\"";
-	if ( (onclick != null) && (onclick != "") ) html +=" onclick=\"" + onclick + "\"";
-	html+= ">";
-	if ( (value != null) && (value != "") ) html += value;
-	html+= "</button>";
-	console.log("getButtonHtml(): html is:" + html);
-	return html;
-}
-
-
-function getUlHtml(arrayList) {
-	console.log("getUlHtml(): arrayList is: " + arrayList);
-	var htmlUl = "<ul>";
-	for (var i=0; i<arrayList.lenght; i++) {
-		htmlUl += arrayList[i];
-	}
-	htmlUl += "</ul>";
-	return htmlUl;
-}
-
-function getLiHtml(value) {
-	return "<li>" + value + "</li>";
-}
-
 
 function submitNuevoPedido() {
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
