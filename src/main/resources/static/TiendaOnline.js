@@ -72,7 +72,7 @@ function refreshInputElementos() {
 	
 	var elementsArray = new Array();
 
-	$("ul#ListaElementos > li > input").each(function( index ) {
+	$("ul#ListaElementos > li > input:text").each(function( index ) {
 		console.log("value is:" + index + ": " + $( this ).val() );
 		elementsArray.push($(this).val());
 	});
