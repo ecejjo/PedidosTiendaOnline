@@ -25,6 +25,9 @@
  
 {{#pedido.elementos}}
 		<script>addToListaElementos("{{texto}}");</script>
+		{{#strike}}
+			<script>$('ul#ListaElementos > li > input').css('text-decoration', 'line-through');</script>
+		{{/strike}}
 {{/pedido.elementos}}
 
 <script>

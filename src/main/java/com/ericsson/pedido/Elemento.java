@@ -17,10 +17,13 @@ public class Elemento {
 	
 	public Elemento() {}
 	
-	public Elemento(String texto)
-	{
+	public Elemento(String texto) {
 		this.texto = texto;
 		this.strike = false;
+	}
+	
+	void setStrike(boolean value) {
+		this.strike = value;
 	}
 
 	@Override

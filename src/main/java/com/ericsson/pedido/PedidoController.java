@@ -45,7 +45,7 @@ public class PedidoController {
 		pedido = new Pedido("Titulo de Pedido 4: con elemento tachados");
 		
 		elemento = new Elemento("Pedido 4 - Elemento 1 - Tachado");
-		elemento.strike = true;
+		elemento.setStrike(true);
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 
