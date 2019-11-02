@@ -15,9 +15,6 @@ function refreshListaElementosText() {
 	if ($('ul#ListaElementos').children().length == 0) {
 		$('p#ListaElementosText').text("No hay elementos en la lista.");		
 	}
-	else {
-		$('p#ListaElementosText').text("Hay elementos");		
-	}
 }
 
 function addInputToListaElementos() {
@@ -29,14 +26,17 @@ function addToListaElementos(value) {
 	// id = Date.now();
 	
 	aux = "<li id = " + id + ">";
+	
 	aux += "<input type=text ";
 	aux += "value = '" + value + "' ";
 	aux += ">";
+	
 	aux += "<button type=button style='display:none;' ";
 	aux += "onclick='removeLi(\"" + id + "\")'";
 	aux += ">";
 	aux += "Borrar Elemento";
 	aux += "</button>";
+
 	aux += "</li>"
 		
 	$('ul#ListaElementos').append(aux);
