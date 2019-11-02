@@ -2,9 +2,6 @@
  * 
  */
 
-var elementsList = new Array();
-var editable = false;
-
 function refreshSubmitButton() {
 	console.log("refreshSubmitButton(): starting ...")
 	if (document.getElementById("titulo-text-input").value == "") {
@@ -52,9 +49,7 @@ function addToListaElementos(value) {
 	$('ul#ListaElementos').append(aux);
 	$('input#element-text-input').val("");
 	
-	refreshListaElementosText();
-	refreshElementosFromList();
-	refreshDeleteButtonsInListaElementos();
+	refreshForm();
 }
 
 function deleteFromListaElementos(id) {
@@ -62,6 +57,12 @@ function deleteFromListaElementos(id) {
 	$('#' + id).remove("li");
 	// $(id).detach();
     // $(this).parent().remove();
+	refreshForm();
+}
+
+function refreshForm() {
+	refreshListaElementosText();
+	refreshElementosFromList();
 	refreshDeleteButtonsInListaElementos();
 }
 
@@ -89,11 +90,6 @@ function refreshDeleteButtonsInListaElementos() {
 		// $('ul#ListaElementos > li > button').hide();
 		$('ul#ListaElementos > li > button').css("display", "none");
 	}
-}
-
-function deleteElementFromList(index) {
-	elementsList.splice(index, 1);
-	showElementsList();
 }
 
 function getInputHtml(type, id, value, onchange, extraAttributes) {
@@ -135,59 +131,13 @@ function getLiHtml(value) {
 }
 
 
-function showElementsList() {
-	
-	var html = "";
-	
-	if (elementsList.length == 0) {
-		html += "Ningún elemento en la lista.";
-	} else {
-		html += "<ul>";
-		for (var i = 0; i < elementsList.length; i++) {
-			html += "<li>";
-			
-			extraAttributes = "";
-			if (elementsList[i].strike == true) {
-				extraAttributes = "checked";
-			}
-			html += getInputHtml("checkbox", "element-checkbox-input-" + i, "", "readElementsInForm()", extraAttributes);
-
-			extraAttributes = "";
-			if (editable == false) {
-				extraAttributes = "disabled";
-			}
-			html += getInputHtml("text", "element-text-input-" + i, elementsList[i], "readElementsInForm()", extraAttributes);
-			
-			if (elementsList.length > 1) {
-				html += getButtonHtml("delete.element." + i, "Borrar Elemento", "deleteElementFromList(" + i + ")");
-			}
-			html += "</li>";
-		}
-		html += "</ul>";
-	}
-	document.getElementById("ListaElementos").innerHTML = html;
-}
-
 function submitNuevoPedido() {
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
-	document.getElementById("elementos").value = elementsList;
 	document.forms["NuevoPedido"].submit();
 }
 
-function readElementsInForm() {
-	index = 0;
-	elementsList = new Array();
-	while(document.getElementById("element-text-input-" + index) != null) {
-		elementsList.push(document.getElementById("element-text-input-" + index).value);
-		index ++;
-	}
-	console.log("readElementsInForm(): elementsList is:" + elementsList);
-}
-
 function submitSalvarPedido() {
-	readElementsInForm();
 	document.getElementById("titulo").value = document.getElementById("titulo-text-input").value;
-	document.getElementById("elementos").value = elementsList;
 	document.forms["SalvarPedido"].submit();
 }
 
