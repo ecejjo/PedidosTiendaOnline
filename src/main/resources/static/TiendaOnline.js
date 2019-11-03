@@ -15,6 +15,9 @@ function refreshListaElementosText() {
 	if ($('ul#ListaElementos').children().length == 0) {
 		$('p#ListaElementosText').text("No hay elementos en la lista.");		
 	}
+	else {
+		$('p#ListaElementosText').empty();		
+	}
 }
 
 function addInputToListaElementos() {
