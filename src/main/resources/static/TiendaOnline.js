@@ -140,7 +140,7 @@ $( document ).ready(function() {
     console.log( "Document ready!" );
     $('input#titulo-text-input').blur(enableDisableSubmitButton);
     $('button#add-element-button').click(addInputToListaElementos);
-    refreshListaElementosText();
+    refreshForm();
 });
 
 

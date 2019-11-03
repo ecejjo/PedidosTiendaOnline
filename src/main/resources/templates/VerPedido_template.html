@@ -25,14 +25,19 @@
 	<hr>
 	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
 	<p id=ListaElementosText></p>
-	<ul id='ListaElementos'></ul>
- 
-{{#pedido.elementos}}
-		<script>addToListaElementos("{{texto}}");</script>
-		{{#strike}}
-			<script>$('ul#ListaElementos > li > input').toggleClass('strike');</script>
-		{{/strike}}
-{{/pedido.elementos}}
+	
+	
+<ul id='ListaElementos'>
+	{{#pedido.elementos}}
+		<li>
+			<input type=checkbox {{#strike}}checked{{/strike}}>
+			<input type=text value="{{texto}}" id='{{id}}'>
+			{{#strike}}
+				<script>strikeInputText({{id}});</script>
+			{{/strike}}
+		</li>
+	{{/pedido.elementos}}
+</ul>
 
 <script>
 	$('ul#ListaElementos > li > input').prop("disabled", true);
