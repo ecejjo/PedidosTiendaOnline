@@ -26,34 +26,34 @@ public class PedidoController {
 	@PostConstruct
 	public void init() {
 
-		Pedido pedido = new Pedido("Titulo de Pedido 1: con un elemento");
-		Elemento elemento = new Elemento("Pedido1.Elemento1");
+		Pedido pedido = new Pedido("Disfraces para Halloween");
+		Elemento elemento = new Elemento("Batman");
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 		pedidosRepository.save(pedido);
 
-		pedido = new Pedido("Titulo de Pedido 2: con 2 elementos");
+		pedido = new Pedido("Regalos para Papa Noel");
 		
-		elemento = new Elemento("Pedido 2 - Elemento 1");
+		elemento = new Elemento("Scalextrix");
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 
-		elemento = new Elemento("Pedido 2 - Elemento 2");
+		elemento = new Elemento("Ibertren");
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 		pedidosRepository.save(pedido);
 		
-		pedido = new Pedido("Titulo de Pedido 3: sin elementos");
+		pedido = new Pedido("Regalos para Reyes Magos");
 		pedidosRepository.save(pedido);
 
-		pedido = new Pedido("Titulo de Pedido 4: con elemento tachados");
+		pedido = new Pedido("Fiesta de Nochebuena");
 		
-		elemento = new Elemento("Pedido 4 - Elemento 1 - Tachado");
+		elemento = new Elemento("Pavo relleno");
 		elemento.setStrike(true);
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 
-		elemento = new Elemento("Pedido 4 - Elemento 2 - No tachado");
+		elemento = new Elemento("Champán");
 		elementosRepository.save(elemento);
 		pedido.getElementos().add(elemento);
 		pedidosRepository.save(pedido);
