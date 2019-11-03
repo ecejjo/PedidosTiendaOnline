@@ -13,11 +13,11 @@
  </script>
 {{/alertMessage}}
 
-{{#pedidos}}
-	<ul>
+<ul>
+	{{#pedidos}}
 		<li><a href="/pedido/{{id}}">{{titulo}}</a></li>
-	</ul>
-{{/pedidos}}
+	{{/pedidos}}
+</ul>
 
 {{^pedidos}}
     <p>Todavia no hay pedidos que mostrar.</p>
