@@ -1,6 +1,5 @@
 package com.ericsson.pedido;
 
-import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,25 +66,6 @@ public class PedidoController {
 		model.addAttribute("pedidos", pedidosRepository.findAll());
 		return "TablonPedidos_template";
 	}
-
-	@GetMapping("/Nuevo{titulo}{elementos}")
-	public String NuevoPedido(Model model, 
-			@RequestParam String titulo,
-			@RequestParam List<String> elementos) {
-
-		Pedido pedido = new Pedido(titulo);
-		
-		for (int index = 0; index < elementos.size(); index++) {
-			Elemento elemento = new Elemento(elementos.get(index));
-			pedido.getElementos().add(elemento);
-			elementosRepository.save(elemento);
-		}
-		pedidosRepository.save(pedido);
-
-		model.addAttribute("pedido", pedido);
-
-		return "VerPedido_template";
-	}
 	
 	@GetMapping("/pedido/{id}")
 	public String verPedido(Model model,
@@ -99,6 +79,18 @@ public class PedidoController {
 			model.addAttribute("titulo", "Pedido no encontrado.");			
 		}
 			
+		return "VerPedido_template";
+	}
+	
+	@GetMapping("/Nuevo{titulo}{elementos}")
+	public String NuevoPedido(Model model, 
+			@RequestParam String titulo,
+			@RequestParam String elementos) {
+
+		Pedido pedido = new Pedido(titulo);
+		parseElementosIntoPedido(pedido, elementos);		
+		pedidosRepository.save(pedido);
+		model.addAttribute("pedido", pedido);
 		return "VerPedido_template";
 	}
 	
@@ -146,17 +138,8 @@ public class PedidoController {
 		if(repoPedido.isPresent()) {
 			Pedido pedido = new Pedido(id);
 			pedido.setTitulo(titulo);
-						
-	        JsonParser parser = new JsonParser();
-	        JsonArray gsonArr = parser.parse(elementos).getAsJsonArray();
-	        for (JsonElement obj : gsonArr) {
-	            JsonObject gsonObj = obj.getAsJsonObject();
-
-				Elemento elemento = new Elemento (gsonObj.get("texto").getAsString());
-				elemento.setStrike(gsonObj.get("strike").getAsBoolean());
-				pedido.getElementos().add(elemento);
-				elementosRepository.save(elemento);
-			}
+			
+			parseElementosIntoPedido(pedido, elementos);
 			pedidosRepository.save(pedido);
 			model.addAttribute("pedido", repoPedido.get());
 			model.addAttribute("alertMessage", "Pedido salvado. [Id: " + id + "]");
@@ -166,5 +149,18 @@ public class PedidoController {
 			model.addAttribute("alertMessage", "Pedido no encontrado. [Id: " + id + "]");
 			return "WindowLocationToTablonPedidos_template";
 		}
+	}
+	
+	public void parseElementosIntoPedido(Pedido pedido, String elementos) {
+	    JsonParser parser = new JsonParser();
+	    JsonArray gsonArr = parser.parse(elementos).getAsJsonArray();
+	    for (JsonElement obj : gsonArr) {
+	        JsonObject gsonObj = obj.getAsJsonObject();
+
+			Elemento elemento = new Elemento (gsonObj.get("texto").getAsString());
+			elemento.setStrike(gsonObj.get("strike").getAsBoolean());
+			pedido.getElementos().add(elemento);
+			elementosRepository.save(elemento);
+		}		
 	}
 }
