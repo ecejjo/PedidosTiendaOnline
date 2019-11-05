@@ -12,7 +12,7 @@ function enableDisableSubmitButton() {
 }
 
 function refreshListaElementosText() {
-	if ($('ul#ListaElementos').children().length == 0) {
+	if ($('#ListaElementos').children().length == 0) {
 		$('p#ListaElementosText').text("No hay elementos en la lista.");		
 	}
 	else {

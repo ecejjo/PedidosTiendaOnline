@@ -2,7 +2,17 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<title>Tienda Pedidos Online - Ver Pedido</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="../css/heroic-features.css" rel="stylesheet">
+	
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    
     <script src="../TiendaOnline.js"></script>
     
     <style>
@@ -12,48 +22,112 @@
 
 <body>
 
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Software Craftsmanship (2019) - Práctica de Desarrollo Web</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
 {{#alertMessage}}
  <script type="text/javascript">
  	alert("{{alertMessage}}");
  </script>
 {{/alertMessage}}
 
-	<h1>Mostrando Pedido</h1>
+ <!-- Page Content -->
+ <div class="container">
 
-	<p>Título: {{pedido.titulo}}
- 
-	<hr>
-	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
-	<p id=ListaElementosText></p>
-	
-	
-<ul id='ListaElementos'>
-	{{#pedido.elementos}}
-		<li>
-			<input type=checkbox {{#strike}}checked{{/strike}}>
-			<input type=text value="{{texto}}" id='{{id}}'>
-			{{#strike}}
-				<script>strikeInputText({{id}});</script>
-			{{/strike}}
-		</li>
-	{{/pedido.elementos}}
-</ul>
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">{{pedido.id}}</h1>
+      <p class="lead">Título: {{pedido.titulo}}</p>
+      
+      <button class="btn btn-primary btn-lg" onclick=editarPedido({{pedido.id}})>Editar Pedido</button>
+      <a href="/Editar/{{pedido.id}}" id="editar-pedido-link" style="visibility: hidden"></a>
+      
+	  <button class="btn btn-primary btn-lg" onclick=confirmarBorrarPedido({{pedido.id}})>Borrar Pedido</button>
+	  <a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
+	  
+	  <hr>
+	  <a class="btn btn-primary btn-lg" href="/">Volver a tablón de Pedidos</a>
+    </header>
 
-<script>
-	$('ul#ListaElementos > li > input').prop("disabled", true);
-	$('ul#ListaElementos > li > button').prop("disabled", true);
-</script>
+<form id="ListaElementos"><fieldset disabled>
 
-<hr>
-<a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
-<button onclick=confirmarBorrarPedido({{pedido.id}})>Borrar Pedido</button>
+    <header class="jumbotron my-4">
+		<h3 id='ListaElementosHeader'>Elementos del pedido</h3>
+		<p id=ListaElementosText></p>
+    </header>
 
-<hr>
-<a href="/Editar/{{pedido.id}}" id="editar-pedido-link" style="visibility: hidden"></a>
-<button onclick=editarPedido({{pedido.id}})>Editar Pedido</button>
+	<!-- Page Features -->
+	<div class="row text-center">
 
-<hr>
-<a href="/">Volver a tablón de Pedidos</a>
+{{#pedido.elementos}}
+	<div class="col-lg-3 col-md-6 mb-4">
+		<div class="card h-100">		
+			<div class="card-body">
+            	<h4 class="card-title">
+            		<div class="form-check form-check-inline">
+  						<input class="form-check-input" type="checkbox" {{#strike}}checked{{/strike}}>
+  						{{#strike}}
+	  						<input type=text class="form-control-plaintext" value="{{texto}}" id='{{id}}' display=inline style="text-decoration:line-through">
+						{{/strike}}
+  						{{^strike}}
+  							<input type=text class="form-control-plaintext" value="{{texto}}" id='{{id}}' display=inline>
+						{{/strike}}
+					</div>
+            	</h4>
+            	<p class="card-text"></p>
+          	</div>
+			<div class="card-footer">
+				<button class="btn btn-primary" type=button onclick='removeLi({{id}})' disabled>Borrar Elemento</button>
+			</div>
+		</div>
+	</div>
+{{/pedido.elementos}}
+
+    </div>
+    <!-- /.row -->
+
+</fieldset></form>
+
+ </div>
+ <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
 </body>
  
