@@ -21,7 +21,11 @@ function refreshListaElementosText() {
 }
 
 function addInputToListaElementos() {
-	addToListaElementos($('input#element-text-input').val());
+	if ($('input#element-text-input').val() != "") {
+		addToListaElementos($('input#element-text-input').val());
+		$('ul#ListaElementos > li > div > input:checkbox').attr("disabled", "disabled");
+		$('ul#ListaElementos > li > div > input:text').attr("disabled", "disabled");
+	}
 }
 
 function addToListaElementos(value) {
@@ -29,21 +33,25 @@ function addToListaElementos(value) {
 	// id = Date.now();
 	
 	aux = "<li id = " + id + ">";
+	
+	aux += "<div class='input-group'>";
 
-	aux += "<input type=checkbox ";
+	aux += "<input type='checkbox' class='custom-control-input inline' ";
 	aux += "onclick='strikeInputText(\"" + id + "\")'";
-	aux += ">";		
-
-	aux += "<input type=text ";
-	aux += "value = '" + value + "' ";
 	aux += ">";
 	
-	aux += "<button type=button style='display:none;' ";
+	aux += "<button class='btn btn-primary btn-sm inline' type=button style='display:none;' ";
 	aux += "onclick='removeLi(\"" + id + "\")'";
 	aux += ">";
 	aux += "Borrar Elemento";
 	aux += "</button>";
 
+	aux += "<input class='form-control col-4' type=text ";
+	aux += "value = '" + value + "' ";
+	aux += "> ";
+
+	aux += "</div>"
+			
 	aux += "</li>"
 		
 	$('ul#ListaElementos').append(aux);
@@ -108,7 +116,7 @@ function refreshInputElementos() {
 function refreshDeleteButtons() {
 	if ($('ul#ListaElementos').children().length > 1) {
 		// $('ul#ListaElementos > li > button').css("display", "block");
-		$('ul#ListaElementos > li > button').show();
+		$('ul#ListaElementos > li > div > button').show();
 	}
 	else {
 		console.log("Hidding ...");
