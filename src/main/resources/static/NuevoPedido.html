@@ -5,38 +5,86 @@
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="TiendaOnline.js"></script>
     
-    <style>
-    	.strike{ text-decoration: line-through; }
-    </style>
+	<title>Tienda Pedidos Online - Nuevo Pedido</title>
+  
+	<!-- Bootstrap core CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/heroic-features.css" rel="stylesheet">
+    
+	<style>
+		.strike{ text-decoration: line-through; }
+	</style>
 </head>
 
 <body>
 
-	<h1>Nuevo Pedido</h1>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			Software Craftsmanship (2019) - Práctica de Desarrollo Web
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			<a class="nav-link" href="#">Home
+				<span class="sr-only">(current)</span>
+			</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Services</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Contact</a>
+			</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
 
-	<hr>
-	Titulo:
-	<form id="NuevoPedido" action="Nuevo" method="get">
-	<input type="text" id="titulo-text-input" name="titulo">
-	<input type="hidden" id="elementos" name="elementos">
+<form id="NuevoPedido" action="Nuevo" method="get">
 
-	<hr>
-	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
-	<p id=ListaElementosText></p>
-	<ul id='ListaElementos'></ul>
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Nuevo Pedido</h1>
+      <p class="lead">Título:
+        <input class="form-control col-4" type="text" id="titulo-text-input" name="titulo" placeholder="<Titulo>">
+		<input type="hidden" id="elementos" name="elementos">
+      </p>
+	  
+	  <hr>
+	  	<button class="btn btn-primary btn-lg" id="submitFormButton" disabled>
+		Registrar Pedido
+		</button>
+	  <a class="btn btn-primary btn-lg" href="/">Tablón de Pedidos</a>
+    </header>
 
-	<br>
-	<input id="element-text-input" type="text">
-	<button id="add-element-button" type="button">Añadir Elemento</button>
-	
-	<hr>
-	<button id="submitFormButton" disabled>
-		Registrar Pedido Nuevo
-	</button>
-	</form>
-
-	 <p><a href="/">Volver a tablon de Pedidos</a>
-
+    <header class="jumbotron my-4">
+		<h2 id='ListaElementosHeader'>
+			Elementos del pedido
+		</h2>
+		
+		<p class="lead" id=ListaElementosText>
+			No hay elementos en la lista.
+		</p>
+		
+		<ul class=list-style id='ListaElementos'>
+		</ul>
+		
+		<hr>
+		<input class="form-control col-4" id="element-text-input" type="text" placeholder="<Elemento>">
+    	<button class="btn btn-primary btn-lg" id="add-element-button" type="button">
+    		Añadir Elemento
+    	</button>		
+    </header>
+</form>
 </body>
-
 </html>
