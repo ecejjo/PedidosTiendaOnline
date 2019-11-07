@@ -75,15 +75,21 @@
 	  <a class="btn btn-primary btn-lg" href="/">Volver a tablón de Pedidos</a>
     </header>
 
-<form id="ListaElementos"><fieldset disabled>
+<form>
+	<fieldset disabled>
 
     <header class="jumbotron my-4">
-		<h3 id='ListaElementosHeader'>Elementos del pedido</h3>
-		<p id=ListaElementosText></p>
+		<h2 id='ListaElementosHeader'>
+			Elementos del pedido
+		</h2>
+
+		<p class="lead" id=NoHayElementos>
+			No hay elementos en la lista.
+		</p>
     </header>
 
 	<!-- Page Features -->
-	<div class="row text-center">
+	<div class="row text-center" id='ListaElementos'>
 
 {{#pedido.elementos}}
 	<div class="col-lg-3 col-md-6 mb-4">
@@ -108,7 +114,6 @@
 		</div>
 	</div>
 {{/pedido.elementos}}
-
     </div>
     <!-- /.row -->
 

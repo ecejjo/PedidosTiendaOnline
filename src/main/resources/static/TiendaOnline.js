@@ -11,13 +11,15 @@ function enableDisableSubmitButton() {
 	}
 }
 
-function refreshListaElementosText() {
+function toggleNoHayElementos() {
+	console.log("toggleNoHayElementos(): Starting ...");
 	if ($('#ListaElementos').children().length == 0) {
-		$('p#ListaElementosText').text("No hay elementos en la lista.");		
+		$('p#NoHayElementos').show();
 	}
 	else {
-		$('p#ListaElementosText').empty();		
+		$('p#NoHayElementos').hide();
 	}
+	console.log("toggleNoHayElementos(): Done.");
 }
 
 function addInputToListaElementos() {
@@ -77,7 +79,7 @@ function strikeInputText(id) {
 
 function refreshForm() {
 	console.log("refreshFrom(): starting ...")
-	refreshListaElementosText();
+	toggleNoHayElementos();
 	refreshElementosJson();
 	refreshDeleteButtons();
 	$('input#element-text-input').val("");
@@ -121,14 +123,14 @@ function refreshElementosJson() {
 
 function refreshDeleteButtons() {
 	if ($('ul#ListaElementos').children().length > 1) {
-		// $('ul#ListaElementos > li > button').css("display", "block");
 		console.log("deleteElementButton(): more than 1 elements.")
+		// $('#deleteElementButton').css("display", "block");
 		$('#deleteElementButton').show();
 	}
 	else {
 		console.log("deleteElementButton: less than 1 elements.");
-		// $('ul#ListaElementos > li > button').hide();
-		$('ul#ListaElementos > li > button').css("display", "none");
+		// $('#deleteElementButton').css("display", "none");
+		$('#deleteElementButton').hide();
 	}
 }
 
