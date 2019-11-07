@@ -23,8 +23,6 @@ function refreshListaElementosText() {
 function addInputToListaElementos() {
 	if ($('input#element-text-input').val() != "") {
 		addToListaElementos($('input#element-text-input').val());
-		$('ul#ListaElementos > li > div > input:checkbox').attr("disabled", "disabled");
-		$('ul#ListaElementos > li > div > input:text').attr("disabled", "disabled");
 	}
 }
 
@@ -36,11 +34,15 @@ function addToListaElementos(value) {
 	
 	aux += "<div class='input-group'>";
 
-	aux += "<input type='checkbox' class='custom-control-input inline' ";
-	aux += "onclick='strikeInputText(\"" + id + "\")'";
+	aux += "<input type='checkbox' ";
+	aux += "onchange=\"strikeInputText('" + id + "')\" ";
+	aux += "class='custom-control-input inline' ";
 	aux += ">";
 	
-	aux += "<button class='btn btn-primary btn-sm inline' type=button style='display:none;' ";
+	aux += "<button ";
+	aux += "class='btn btn-primary btn-sm inline' ";
+	aux += "type=button ";
+	aux += "id='deleteElementButton'";
 	aux += "onclick='removeLi(\"" + id + "\")'";
 	aux += ">";
 	aux += "Borrar Elemento";
@@ -48,6 +50,7 @@ function addToListaElementos(value) {
 
 	aux += "<input class='form-control col-4' type=text ";
 	aux += "value = '" + value + "' ";
+	aux += "onblur='refreshElementosJson()'";
 	aux += "> ";
 
 	aux += "</div>"
@@ -67,25 +70,25 @@ function removeLi(id) {
 }
 
 function strikeInputText(id) {
-	$('#' + id + " > input").toggleClass('strike');
+	$('#' + id + " input:text").toggleClass('strike');
 	refreshForm();
 }
 
 
 function refreshForm() {
+	console.log("refreshFrom(): starting ...")
 	refreshListaElementosText();
-	refreshInputElementos();
+	refreshElementosJson();
 	refreshDeleteButtons();
 	$('input#element-text-input').val("");
+	console.log("refreshFrom(): Done.")
 }
 
-function refreshInputElementos() {
-	
-	var elementsArray = new Array();
-	
+function refreshElementosJson() {
+
 	var checkboxArray = new Array();
-	$("ul#ListaElementos > li > input:checkbox").each(function( index ) {
-		console.log("value is:" + index + ": " + $( this ).val() );
+	$("ul#ListaElementos input:checkbox").each(function(index) {
+		console.log("refreshElementosJson(): value is:" + index + ": " + $(this).val() );
 		if ($(this).is(":checked")) {
 			checkboxArray.push(true);	
 		}
@@ -95,31 +98,35 @@ function refreshInputElementos() {
 	});
 	
 	var textArray = new Array();
-	$("ul#ListaElementos > li > input:text").each(function( index ) {
-		console.log("value is:" + index + ": " + $( this ).val() );
+	$("ul#ListaElementos input:text").each(function(index) {
+		console.log("refreshElementosJson(): value is:" + index + ": " + $(this).val() );
 		textArray.push($(this).val());
 	});
 	
+	var elementsArray = new Array();
 	for (var i = 0; i < checkboxArray.length; i++) {
-		elementsArray.push("{ \"strike\":" + 
-				checkboxArray[i] + 
-				", \"texto\":\"" + 
-				textArray[i] + "\"}");
+		elementsArray.push(
+				"{" + 
+					"\"strike\":" + checkboxArray[i] + 
+					", " +
+					"\"texto\":\"" + textArray[i] + 
+				"\"}");
 	}
 
-	console.log("refreshInputElementos(): elementsArray is:" + elementsArray);
+	console.log("refreshElementosJson(): elementsArray is:" + elementsArray);
 	aux = "[" + elementsArray + "]";
-	console.log("aux is:" + aux);
-	$('input#elementos').val(aux);
+	console.log("refreshElementosJson(): aux is:" + aux);
+	$('#elementosJson').val(aux);
 }
 
 function refreshDeleteButtons() {
 	if ($('ul#ListaElementos').children().length > 1) {
 		// $('ul#ListaElementos > li > button').css("display", "block");
-		$('ul#ListaElementos > li > div > button').show();
+		console.log("deleteElementButton(): more than 1 elements.")
+		$('#deleteElementButton').show();
 	}
 	else {
-		console.log("Hidding ...");
+		console.log("deleteElementButton: less than 1 elements.");
 		// $('ul#ListaElementos > li > button').hide();
 		$('ul#ListaElementos > li > button').css("display", "none");
 	}

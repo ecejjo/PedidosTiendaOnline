@@ -19,7 +19,7 @@
 	<form id="SalvarPedido" action="/Salvar" method="get">
 	<input type="hidden" id="id" name="id" value="{{pedido.id}}">
 	<input type="text" id="titulo-text-input" name="titulo" value="{{pedido.titulo}}">
-	<input type="hidden" id="elementos" name="elementos">
+	<input type="hidden" id="elementosJson" name="elementosJson">
 
 	<hr>
 	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
@@ -29,11 +29,11 @@
 	{{#pedido.elementos}}
 		<li id='{{id}}'>
 			<input type=checkbox {{#strike}}checked{{/strike}} onchange='strikeInputText({{id}})'>
-			<input type=text value="{{texto}}" id='{{id}}'>
+			<button type=button id='deleteElementButton' onclick='removeLi({{id}})'>Borrar Elemento</button>
+			<input type=text value="{{texto}}" id='{{id}}' onblur='refreshInputElementos()'>
 			{{#strike}}
 				<script>strikeInputText({{id}});</script>
 			{{/strike}}
-			<button type=button style='display:none;' onclick='removeLi({{id}})'>Borrar Elemento</button>			
 		</li>
 	{{/pedido.elementos}}
 </ul>

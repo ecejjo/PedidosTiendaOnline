@@ -82,13 +82,13 @@ public class PedidoController {
 		return "VerPedido_template";
 	}
 	
-	@GetMapping("/Nuevo{titulo}{elementos}")
+	@GetMapping("/Nuevo{titulo}{elementosJson}")
 	public String NuevoPedido(Model model, 
 			@RequestParam String titulo,
-			@RequestParam String elementos) {
+			@RequestParam String elementosJson) {
 
 		Pedido pedido = new Pedido(titulo);
-		parseElementosIntoPedido(pedido, elementos);		
+		parseElementosJsonIntoPedido(pedido, elementosJson);		
 		pedidosRepository.save(pedido);
 		model.addAttribute("pedido", pedido);
 		return "VerPedido_template";
@@ -127,11 +127,11 @@ public class PedidoController {
 		return "EditarPedido_template";
 	}
 	
-	@GetMapping("/Salvar{id}{titulo}{elementos}")
+	@GetMapping("/Salvar{id}{titulo}{elementosJson}")
 	public String salvarPedido(Model model,
 			@RequestParam long id,
 			@RequestParam String titulo,
-			@RequestParam String elementos) {
+			@RequestParam String elementosJson) {
 		
 		Optional<Pedido> repoPedido = pedidosRepository.findById(id);
 		
@@ -139,7 +139,7 @@ public class PedidoController {
 			Pedido pedido = new Pedido(id);
 			pedido.setTitulo(titulo);
 			
-			parseElementosIntoPedido(pedido, elementos);
+			parseElementosJsonIntoPedido(pedido, elementosJson);
 			pedidosRepository.save(pedido);
 			model.addAttribute("pedido", repoPedido.get());
 			model.addAttribute("alertMessage", "Pedido salvado. [Id: " + id + "]");
@@ -151,7 +151,7 @@ public class PedidoController {
 		}
 	}
 	
-	public void parseElementosIntoPedido(Pedido pedido, String elementos) {
+	public void parseElementosJsonIntoPedido(Pedido pedido, String elementos) {
 	    JsonParser parser = new JsonParser();
 	    JsonArray gsonArr = parser.parse(elementos).getAsJsonArray();
 	    for (JsonElement obj : gsonArr) {
