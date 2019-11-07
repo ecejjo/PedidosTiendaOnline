@@ -5,6 +5,14 @@
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="../TiendaOnline.js"></script>
     
+	<title>Tienda Pedidos Online - Editar Pedido</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="../css/heroic-features.css" rel="stylesheet">
+    
     <style>
     	.strike{ text-decoration: line-through; }
     </style>
@@ -12,44 +20,98 @@
 
 <body>
 
-	<h1>Editar Pedido</h1>
-
-	<hr>
-	Titulo:
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			Software Craftsmanship (2019) - Práctica de Desarrollo Web
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			<a class="nav-link" href="#">Home
+				<span class="sr-only">(current)</span>
+			</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Services</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Contact</a>
+			</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	
 	<form id="SalvarPedido" action="/Salvar" method="get">
-	<input type="hidden" id="id" name="id" value="{{pedido.id}}">
-	<input type="text" id="titulo-text-input" name="titulo" value="{{pedido.titulo}}">
-	<input type="hidden" id="elementosJson" name="elementosJson">
-
-	<hr>
-	<h2 id='ListaElementosHeader'>Elementos del pedido</h2>
-	<p id=ListaElementosText></p>
-
-<ul id='ListaElementos'>
-	{{#pedido.elementos}}
-		<li id='{{id}}'>
-			<input type=checkbox {{#strike}}checked{{/strike}} onchange='strikeInputText({{id}})'>
-			<button type=button id='deleteElementButton' onclick='removeLi({{id}})'>Borrar Elemento</button>
-			<input type=text value="{{texto}}" id='{{id}}' onblur='refreshInputElementos()'>
-			{{#strike}}
-				<script>strikeInputText({{id}});</script>
-			{{/strike}}
-		</li>
-	{{/pedido.elementos}}
-</ul>
-
-	<br>
-	<input id="element-text-input" type="text">
-	<button id="add-element-button" type="button">Añadir Elemento</button>
+	
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Editar Pedido</h1>
+      <p class="lead">Título:
+      	<input type="hidden" id="id" name="id" value="{{pedido.id}}">
+      
+        <input class="form-control col-4" type="text" id="titulo-text-input" name="titulo" placeholder="{{pedido.titulo}}">
+		<input type="hidden" id="elementosJson" name="elementosJson">
+      </p>
+	  
+	  <hr>		
+		<button class="btn btn-primary btn-lg" id="submitFormButton" onclick="submitSalvarPedido()">
+			Salvar Pedido Existente
+		</button>
+	  	<a class="btn btn-primary btn-lg" href="/">Tablón de Pedidos</a>
+    </header>
+	
+	<header class="jumbotron my-4">
+		<h2 id='ListaElementosHeader'>
+			Elementos del pedido
+		</h2>
 		
-	<hr>
-	<button id="submitFormButton" onclick="submitSalvarPedido()">
-		Salvar Pedido Existente
-	</button>
-	</form>
+		<p class="lead" id=ListaElementosText>
+			No hay elementos en la lista.
+		</p>
+				
+		<ul class=list-unstyled id='ListaElementos'>
+		{{#pedido.elementos}}
+			<li id='{{id}}'>
+				<input class='form-check-input inline' type=checkbox {{#strike}}checked{{/strike}} onchange='strikeInputText({{id}})'>
+				<button class='btn btn-primary btn-sm inline' type=button id='deleteElementButton' onclick='removeLi({{id}})'>Borrar Elemento</button>
+				<input type=text value="{{texto}}" id='{{id}}' onblur='refreshInputElementos()'>
+				{{#strike}}
+					<script>strikeInputText({{id}});</script>
+				{{/strike}}
+			</li>
+		{{/pedido.elementos}}
+		</ul>
+		
+		<hr>
+		<input class="form-control col-4" id="element-text-input" type="text" placeholder="<Elemento>">
+    	<button class="btn btn-primary btn-lg" id="add-element-button" type="button">
+    		Añadir Elemento
+    	</button>		
+    </header>
 
- <p><a href="/">Volver a tablón de Pedidos</a>
+</form>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
- </body>
+</body>
  
 </html>
