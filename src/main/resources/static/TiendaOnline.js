@@ -2,21 +2,21 @@
  * 
  */
 
-function enableDisableSubmitButton() {
+function enableDisableRegistrarPedidoButton() {
 	if ($('input#titulo-text-input').val() == "") {
-		$('button#submitFormButton').prop("disabled", true);
+		$('button#registrar-pedido-button').prop("disabled", true);
 	}
 	else {
-		$('button#submitFormButton').prop("disabled", false);
+		$('button#registrar-pedido-button').prop("disabled", false);
 	}
 }
 
 function enableDisableAnadirElementoButton() {
 	if ($('input#element-text-input').val() == "") {
-		$('button#add-element-button').prop("disabled", true);
+		$('button#anadir-elemento-button').prop("disabled", true);
 	}
 	else {
-		$('button#add-element-button').prop("disabled", false);
+		$('button#anadir-elemento-button').prop("disabled", false);
 	}
 }
 
@@ -46,9 +46,10 @@ function addToListaElementos(value) {
 	
 	aux += "<div class='input-group'>";
 
-	aux += "<input type='checkbox' ";
+	aux += "<input ";
+	aux += "class='form-check-input inline'";
+	aux += "type='checkbox' ";
 	aux += "onchange=\"strikeInputText('" + id + "')\" ";
-	aux += "class='custom-control-input inline' ";
 	aux += ">";
 	
 	aux += "<button ";
@@ -60,7 +61,9 @@ function addToListaElementos(value) {
 	aux += "Borrar Elemento";
 	aux += "</button>";
 
-	aux += "<input class='form-control col-4' type=text ";
+	aux += "<input ";
+	aux += "class='form-control col-4 inline' ";
+	aux += "type=text ";
 	aux += "value = '" + value + "' ";
 	aux += "onblur='refreshElementosJson()'";
 	aux += "> ";
@@ -168,9 +171,9 @@ function editarPedido(pedidoId) {
 //A $( document ).ready() block.
 $( document ).ready(function() {
     console.log( "Document ready!" );
-    $('input#titulo-text-input').blur(enableDisableSubmitButton);
+    $('input#titulo-text-input').blur(enableDisableRegistrarPedidoButton);
     $('input#element-text-input').blur(enableDisableAnadirElementoButton);
-    $('button#add-element-button').click(addInputToListaElementos);
+    $('button#anadir-elemento-button').click(addInputToListaElementos);
     refreshForm();
 });
 

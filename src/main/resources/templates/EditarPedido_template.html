@@ -63,7 +63,7 @@
       </p>
 	  
 	  <hr>		
-		<button class="btn btn-primary btn-lg" id="submitFormButton" onclick="submitSalvarPedido()">
+		<button class="btn btn-primary btn-lg" id="registrar-pedido-button" onclick="submitSalvarPedido()">
 			Salvar Pedido Existente
 		</button>
 	  	<a class="btn btn-primary btn-lg" href="/">Tablón de Pedidos</a>
@@ -79,19 +79,21 @@
 		<ul class=list-unstyled id='ListaElementos'>
 		{{#pedido.elementos}}
 			<li id='{{id}}'>
+				<div class='input-group'>
 				<input class='form-check-input inline' type=checkbox {{#strike}}checked{{/strike}} onchange='strikeInputText({{id}})'>
 				<button class='btn btn-primary btn-sm inline' type=button id='deleteElementButton' onclick='removeLi({{id}})'>Borrar Elemento</button>
-				<input type=text value="{{texto}}" id='{{id}}' onblur='refreshInputElementos()'>
+				<input class='form-control col-4 inline' type=text value="{{texto}}" id='{{id}}' onblur='refreshInputElementos()'>
 				{{#strike}}
 					<script>strikeInputText({{id}});</script>
 				{{/strike}}
+				</div>
 			</li>
 		{{/pedido.elementos}}
 		</ul>
 		
 		<hr>
-		<input class="form-control col-4" id="element-text-input" type="text" placeholder="<Elemento>">
-    	<button class="btn btn-primary btn-lg" id="add-element-button" type="button">
+		<input class="form-control col-4" id="element-text-input" type="text" placeholder="<Nuevo Elemento>">
+    	<button class="btn btn-primary btn-lg" id="anadir-elemento-button" type="button" disabled>
     		Añadir Elemento
     	</button>		
     </header>
