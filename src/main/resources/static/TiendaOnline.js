@@ -3,12 +3,25 @@
  */
 
 function enableDisableRegistrarPedidoButton() {
+	
+	$('button#registrar-pedido-button').prop("disabled", false);
+	
 	if ($('input#titulo-text-input').val() == "") {
 		$('button#registrar-pedido-button').prop("disabled", true);
+		return;
 	}
-	else {
-		$('button#registrar-pedido-button').prop("disabled", false);
-	}
+	
+	$("ul#ListaElementos input:text").each(function(index) {
+		console.log("Comprobando elementos ...")
+		if ($(this).val() == "") {
+			console.log("Un elemento vacío.")
+			$('button#registrar-pedido-button').prop("disabled", true);
+			return;
+		}
+		else{
+			console.log("Un elemento lleno.")
+		}
+	});
 }
 
 function enableDisableAnadirElementoButton() {
@@ -132,6 +145,8 @@ function refreshElementosJson() {
 	aux = "[" + elementsArray + "]";
 	console.log("refreshElementosJson(): aux is:" + aux);
 	$('#elementosJson').val(aux);
+	
+	enableDisableRegistrarPedidoButton();
 }
 
 function refreshDeleteButtons() {
