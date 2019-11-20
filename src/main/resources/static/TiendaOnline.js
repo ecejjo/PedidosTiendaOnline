@@ -173,8 +173,8 @@ function submitSalvarPedido() {
 }
 
 
-function confirmarBorrarPedido(pedidoId) {
-	if (confirm("¿Borrar Pedido? [id=" + pedidoId + "]")) {
+function confirmarBorrarPedido(pedidoId, titulo) {
+	if (confirm("¿Borrar pedido con título '" + titulo + "'? [id=" + pedidoId + "]")) {
 		document.getElementById("borrar-pedido-link").click();
 	}
 }

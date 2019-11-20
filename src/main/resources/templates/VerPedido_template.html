@@ -68,7 +68,7 @@
       <button class="btn btn-primary btn-lg" onclick=editarPedido({{pedido.id}})>Editar Pedido</button>
       <a href="/Editar/{{pedido.id}}" id="editar-pedido-link" style="visibility: hidden"></a>
       
-	  <button class="btn btn-primary btn-lg" onclick=confirmarBorrarPedido({{pedido.id}})>Borrar Pedido</button>
+	  <button class="btn btn-primary btn-lg" onclick="confirmarBorrarPedido({{pedido.id}},'{{pedido.titulo}}')">Borrar Pedido</button>
 	  <a href="/Borrar/{{pedido.id}}" id="borrar-pedido-link" style="visibility: hidden"></a>
 	  
 	  <hr>
