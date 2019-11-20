@@ -82,7 +82,7 @@
 				<div class='input-group'>
 				<input class='form-check-input inline' type=checkbox {{#strike}}checked{{/strike}} onchange='strikeInputText({{id}})'>
 				<button class='btn btn-primary btn-sm inline' type=button id='deleteElementButton' onclick='removeLi({{id}})'>Borrar Elemento</button>
-				<input class='form-control col-4 inline' type=text value="{{texto}}" id='{{id}}' onblur='refreshInputElementos()'>
+				<input class='form-control col-4 inline' type=text value="{{texto}}" id='{{id}}' onblur='refreshElementosJson()'>
 				{{#strike}}
 					<script>strikeInputText({{id}});</script>
 				{{/strike}}
