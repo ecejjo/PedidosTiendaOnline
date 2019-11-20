@@ -11,6 +11,16 @@ function enableDisableSubmitButton() {
 	}
 }
 
+function enableDisableAnadirElementoButton() {
+	if ($('input#element-text-input').val() == "") {
+		$('button#add-element-button').prop("disabled", true);
+	}
+	else {
+		$('button#add-element-button').prop("disabled", false);
+	}
+}
+
+
 function toggleNoHayElementos() {
 	console.log("toggleNoHayElementos(): Starting ...");
 	if ($('#ListaElementos').children().length == 0) {
@@ -159,6 +169,7 @@ function editarPedido(pedidoId) {
 $( document ).ready(function() {
     console.log( "Document ready!" );
     $('input#titulo-text-input').blur(enableDisableSubmitButton);
+    $('input#element-text-input').blur(enableDisableAnadirElementoButton);
     $('button#add-element-button').click(addInputToListaElementos);
     refreshForm();
 });
